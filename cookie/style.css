@@ -1,0 +1,308 @@
+/* MENU */
+.menu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 16px 25px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #D6E0DC;
+    gap: 22px;
+}
+.menu a {
+    display: inline-block;
+    color: #404040;
+    text-decoration: none;
+    font-family: "Times New Roman", serif;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 7px 2px;
+    border-bottom: 2px solid transparent;
+    transition: 0.3s;
+}
+.menu a:hover {
+    color: #5B8798;
+    border-bottom-color: #5B8798;
+}
+.menu a.active {
+    color: #5B8798;
+    border-bottom-color: #5B8798;
+}
+/* NỘI DUNG CHUNG */
+.content {
+    padding: 30px 35px;
+    min-height: 300px;
+    background-color: #FFFFFF;
+    color: #404040;
+    font-family: "Times New Roman", serif;
+    font-size: 14px;
+}
+.content h3 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    padding-bottom: 8px;
+    color: #5B8798;
+    font-size: 21px;
+    font-weight: bold;
+    border-bottom: 1px solid #D6E0DC;
+}
+.content h4 {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: #345D6B;
+    font-size: 17px;
+}
+/* ADMIN HOME */
+.admin-home {
+    max-width: 650px;
+    margin: 0 auto;
+}
+.admin-welcome {
+    margin-bottom: 25px;
+}
+.admin-welcome p {
+    margin: 8px 0;
+}
+.admin-welcome strong {
+    color: #345D6B;
+}
+.favorite-section {
+    margin-bottom: 25px;
+}
+.favorite-section h4, .add-link-section h4 {
+    margin-top: 0;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #EEF3EF;
+}
+.favorite-list {
+    border: 1px solid #D6E0DC;
+    border-radius: 7px;
+    overflow: hidden;
+}
+.favorite-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid #EEF3EF;
+}
+.favorite-item:last-child {
+    border-bottom: none;
+}
+.favorite-item:nth-child(even) {
+    background-color: #F6F8F6;
+}
+.favorite-item a {
+    color: #5B8798;
+    font-weight: bold;
+    text-decoration: none;
+}
+.favorite-item a:hover {
+    color: #345D6B;
+    text-decoration: underline;
+}
+.favorite-item span {
+    color: #6F7775;
+}
+.no-data {
+    padding: 15px;
+    margin: 0;
+    color: #6F7775;
+    text-align: center;
+    border: 1px solid #D6E0DC;
+    border-radius: 7px;
+}
+/* FORM THÊM LINK */
+.link-form {
+    padding: 20px;
+    background-color: #F6F8F6;
+    border: 1px solid #D6E0DC;
+    border-radius: 7px;
+}
+.form-group {
+    margin-bottom: 16px;
+}
+.form-group:last-of-type {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: #345D6B;
+    font-weight: bold;
+}
+.form-group input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 9px 10px;
+    font-family: "Times New Roman", serif;
+    font-size: 14px;
+    color: #404040;
+    background-color: #FFFFFF;
+    border: 1px solid #D6E0DC;
+    border-radius: 5px;
+    outline: none;
+    transition: 0.3s;
+}
+.form-group input:focus {
+    border-color: #5B8798;
+    box-shadow: 0 0 0 2px rgba(91, 135, 152, 0.12);
+}
+/* NÚT CHUNG */
+.link-form button, .upload-form button {
+    padding: 9px 20px;
+    font-family: "Times New Roman", serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #5B8798;
+    border: 1px solid #5B8798;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.link-form button:hover, .upload-form button:hover {
+    background-color: #345D6B;
+    border-color: #345D6B;
+}
+/* LOGIN */
+.login-page {
+    max-width: 650px;
+    margin: 0 auto;
+}
+.login-form {
+    padding: 20px;
+    background-color: #F6F8F6;
+    border: 1px solid #D6E0DC;
+    border-radius: 7px;
+}
+.form-buttons {
+    text-align: center;
+    padding-top: 5px;
+}
+.form-buttons input {
+    padding: 9px 20px;
+    margin: 0 5px;
+    font-family: "Times New Roman", serif;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.form-buttons input[type="reset"] {
+    color: #404040;
+    background-color: #F6F8F6;
+    border: 1px solid #D6E0DC;
+}
+.form-buttons input[type="reset"]:hover {
+    background-color: #EAF1EF;
+}
+.form-buttons input[type="submit"] {
+    color: #FFFFFF;
+    background-color: #5B8798;
+    border: 1px solid #5B8798;
+}
+.form-buttons input[type="submit"]:hover {
+    background-color: #345D6B;
+    border-color: #345D6B;
+}
+.login-error {
+    padding: 9px 12px;
+    margin-bottom: 15px;
+    color: #A94442;
+    background-color: #FBEAEA;
+    border: 1px solid #E7C6C6;
+    border-radius: 5px;
+    text-align: center;
+}
+.cookie-note {
+    margin: 15px 0 0;
+    color: #6F7775;
+    font-size: 13px;
+    text-align: center;
+}
+.login-note {
+    margin-top: 25px;
+}
+.login-note h4 {
+    margin-bottom: 10px;
+}
+.login-note p {
+    margin: 8px 0;
+}
+/* UPLOAD */
+.upload-page {
+    max-width: 650px;
+    margin: 0 auto;
+}
+.upload-form {
+    padding: 20px;
+    background-color: #F6F8F6;
+    border: 1px solid #D6E0DC;
+    border-radius: 7px;
+}
+.upload-description {
+    margin-bottom: 16px;
+}
+.upload-file {
+    margin-bottom: 20px;
+}
+.upload-file label {
+    display: block;
+    margin-bottom: 6px;
+    color: #345D6B;
+    font-weight: bold;
+}
+.upload-file input[type="file"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    font-family: "Times New Roman", serif;
+    font-size: 14px;
+    color: #404040;
+    background-color: #FFFFFF;
+    border: 1px solid #D6E0DC;
+    border-radius: 5px;
+}
+.upload-message {
+    padding: 9px 12px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+.upload-message.success {
+    color: #345D6B;
+    background-color: #EAF1EF;
+    border: 1px solid #D6E0DC;
+}
+.upload-message.error {
+    color: #A94442;
+    background-color: #FBEAEA;
+    border: 1px solid #E7C6C6;
+}
+/* TRANG GIẢI THÍCH COOKIE */
+.cookie-page {
+    max-width: 650px;
+    margin: 0 auto;
+}
+.cookie-page h3 {
+    margin-top: 0;
+}
+.cookie-list {
+    margin: 0 0 25px;
+    padding-left: 25px;
+}
+.cookie-list li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+.cookie-list li:last-child {
+    margin-bottom: 0;
+}
+.cookie-page code {
+    color: #345D6B;
+    background-color: #EEF3F1;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+}
+.cookie-page p {
+    margin-top: 10px;
+}

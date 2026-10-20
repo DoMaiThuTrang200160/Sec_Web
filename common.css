@@ -1,0 +1,264 @@
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: "Times New Roman", serif;
+    background: #F4F7F6;
+    color: #404040;
+}
+.container {
+    width: 100%;
+    margin: auto;
+    background: #FFFFFF;
+    display: grid;
+    grid-template-areas: "info banner" "menu content" "footer footer";
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 170px auto auto;
+    border: 1px solid #D6E0DC;
+}
+/* ===== THÔNG TIN SINH VIÊN ===== */
+.student-info {
+    grid-area: info;
+    height: 170px;
+    padding: 10px;
+    text-align: center;
+    border-right: 1px solid #D6E0DC;
+    border-bottom: 2px solid #5B8798;
+    background: #F6F8F6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+.student-info img {
+    width: 85px;
+    height: 85px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #5B8798;
+    margin: 0;
+}
+.student-info .student-name {
+    margin: 3px 0;
+    font-size: 15px;
+    font-weight: bold;
+    color: #404040;
+}
+.student-info .student-id {
+    margin: 2px 0;
+    font-size: 13px;
+    color: #6F7775;
+}
+/* ===== BANNER ===== */
+.banner {
+    grid-area: banner;
+    height: 170px;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #345D6B;
+    border-bottom: 2px solid #5B8798;
+    background: #FFFFFF;
+    overflow: hidden;
+}
+.banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+}
+/* ===== SIDEBAR / MENU ===== */
+.sidebar {
+    grid-area: menu;
+    padding: 12px 10px;
+    background-color: #FFFFFF;
+    border-right: 1px solid #D6E0DC;
+}
+.sidebar p {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    color: #345D6B;
+}
+.sidebar a {
+    color: inherit;
+}
+.sidebar a:hover {
+    color: #5B8798;
+}
+.category-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.category-item {
+    margin-bottom: 6px;
+    border: 1px solid #D6E0DC;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.category-item a {
+    display: block;
+    padding: 7px 9px;
+    color: #404040;
+    text-decoration: none;
+    font-family: "Times New Roman", serif;
+    font-size: 13px;
+    font-weight: normal;
+    background-color: #FFFFFF;
+    transition: 0.3s;
+}
+.category-item a:hover {
+    color: #345D6B;
+    background-color: #F6F8F6;
+}
+.category-item a.selected {
+    color: #FFFFFF;
+    background-color: #5B8798;
+    border-color: #5B8798;
+    font-weight: normal;
+}
+.category-item:has(a.selected) {
+    border-color: #5B8798;
+}
+/* ===== MENU DẠNG THANH NGANG - GIỮ LẠI NẾU BÀI KHÁC CÓ DÙNG ===== */
+.menu {
+    background-color: #F6F8F6;
+    overflow: hidden;
+    border-bottom: 1px solid #D6E0DC;
+}
+.menu a {
+    float: left;
+    display: block;
+    color: #404040;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.menu a:hover {
+    background-color: #EAF1EF;
+    color: #345D6B;
+}
+.active {
+    background-color: #5B8798;
+    color: #FFFFFF;
+}
+/* ===== NỘI DUNG ===== */
+.main-content {
+    grid-area: content;
+    background: #FFFFFF;
+    overflow: hidden;
+    min-width: 0;
+}
+.main-content iframe {
+    width: 100%;
+    height: 650px;
+    display: block;
+    border: none;
+}
+.content {
+    padding: 20px;
+    min-height: 300px;
+    background-color: #FFFFFF;
+}
+/* ===== FOOTER ===== */
+.footer {
+    grid-area: footer;
+    padding: 10px;
+    text-align: center;
+    color: #7F8C8D;
+    border-top: 1px solid #D6E0DC;
+    background: #F6F8F6;
+    font-size: 14px;
+}
+/* ===== BẢNG MÀU ===== */
+.color-grid {
+    width: 100%;
+    height: 160px;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+.color-grid td {
+    height: 50px;
+    border: 2px solid #FFFFFF;
+}
+/* ===== PHẦN BỔ SUNG TỪ CSS MỚI ===== */
+/* Cho các khu vực cần co giãn trong layout */
+.main-content, .banner {
+    min-width: 0;
+}
+/* Các phần tử ảnh trong nội dung */
+.content img {
+    max-width: 100%;
+    height: auto;
+}
+/* Nút / liên kết dạng nút nếu bài có sử dụng */
+.content a.button, .content button {
+    display: inline-block;
+    padding: 10px 16px;
+    border: 1px solid #5B8798;
+    border-radius: 7px;
+    background-color: #5B8798;
+    color: #FFFFFF;
+    font-family: "Times New Roman", serif;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.content a.button:hover, .content button:hover {
+    background-color: #345D6B;
+    border-color: #345D6B;
+}
+/* Ô nhập liệu nếu bài có form */
+.content input, .content select, .content textarea {
+    font-family: "Times New Roman", serif;
+    color: #404040;
+    border: 1px solid #D6E0DC;
+    border-radius: 5px;
+    padding: 8px 10px;
+    background-color: #FFFFFF;
+}
+.content input:focus, .content select:focus, .content textarea:focus {
+    outline: none;
+    border-color: #5B8798;
+}
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+    .container {
+        grid-template-areas: "info" "banner" "menu" "content" "footer";
+        grid-template-columns: 1fr;
+    }
+    .student-info {
+        width: 100%;
+        border-right: none;
+    }
+    .sidebar {
+        width: 100%;
+        border-right: none;
+    }
+    .category-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .category-item {
+        margin-bottom: 0;
+    }
+    .category-item a {
+        padding: 8px 10px;
+    }
+    .main-content {
+        width: 100%;
+    }
+}
