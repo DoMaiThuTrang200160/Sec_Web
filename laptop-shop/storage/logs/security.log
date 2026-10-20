@@ -1,0 +1,4 @@
+[2026-10-06 07:57:07] [security] CSRF token sai/thiếu - IP: 127.0.0.1 - URI: /login
+[2026-10-06 07:57:53] [security] CSRF token sai/thiếu - IP: 127.0.0.1 - URI: /login
+[2026-10-06 07:59:18] [security] CSRF token sai/thiếu - IP: 127.0.0.1 - URI: /login
+[2026-10-06 07:59:40] [security] CSRF token sai/thiếu - IP: 127.0.0.1 - URI: /login
