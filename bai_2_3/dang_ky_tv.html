@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký thành viên</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: "Times New Roman", serif;
+            background: #FFFFFF;
+            color: #404040;
+            padding: 20px;
+        }
+        .form-wrapper {
+            max-width: 550px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #D6E0DC;
+            border-radius: 5px;
+            background: #F6F8F6;
+        }
+        .form-wrapper h2 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #5B8798;
+            border-bottom: 1px solid #D6E0DC;
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #345D6B;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #D6E0DC;
+            border-radius: 4px;
+            font-family: "Times New Roman", serif;
+            font-size: 14px;
+            background: #FFFFFF;
+            color: #404040;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #5B8798;
+            box-shadow: 0 0 4px rgba(91, 135, 152, 0.25);
+        }
+        .form-group input::placeholder {
+            color: #6F7775;
+        }
+        .required-field {
+            background-color: #EEF3F1 !important;
+        }
+        .input-error {
+            border: 1px solid #D9534F !important;
+            background-color: #FDECEC !important;
+        }
+        .input-error:focus {
+            border-color: #D9534F !important;
+            box-shadow: 0 0 4px rgba(217, 83, 79, 0.3) !important;
+        }
+        .field-error-msg {
+            color: #345D6B;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .btn-submit {
+            flex: 1;
+            padding: 10px;
+            background-color: #5B8798;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: "Times New Roman", serif;
+            font-size: 15px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .btn-submit:hover {
+            background-color: #345D6B;
+        }
+        .btn-reset {
+            flex: 1;
+            padding: 10px;
+            background-color: #6F7775;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: "Times New Roman", serif;
+            font-size: 15px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .btn-reset:hover {
+            background-color: #404040;
+        }
+        /* Phần hiển thị thông tin đã nhập */
+        #result-msg {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #D6E0DC;
+            border-radius: 5px;
+            background-color: #FFFFFF;
+        }
+        #result-msg h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-align: center;
+            color: #345D6B;
+            font-size: 17px;
+        }
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .result-table td {
+            padding: 8px;
+            border: 1px solid #D6E0DC;
+        }
+        .result-table td:first-child {
+            width: 38%;
+            font-weight: bold;
+            color: #345D6B;
+            background-color: #EEF3F1;
+        }
+        .result-table td:last-child {
+            background-color: #FFFFFF;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-wrapper">
+        <h2>ĐĂNG KÝ THÀNH VIÊN</h2>
+        <form id="registerForm" onsubmit="return validateRegisterForm(event)">
+            <div class="form-group">
+                <label for="fullname">Họ tên (*):</label>
+                <input type="text" id="fullname" class="required-field focusable" onblur="normalizeName(this)" placeholder="Nguyễn Văn A">
+                <div class="field-error-msg" id="err-fullname">Vui lòng nhập họ tên.</div>
+            </div>
+            <div class="form-group">
+                <label for="dob">Ngày sinh:</label>
+                <input type="date" id="dob" class="focusable">
+                <div class="field-error-msg" id="err-dob">Ngày sinh chưa đúng định dạng.</div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email (*):</label>
+                <input type="text" id="email" class="required-field focusable" placeholder="ten@gmail.com">
+                <div class="field-error-msg" id="err-email">Email không hợp lệ.</div>
+            </div>
+            <div class="form-group">
+                <label for="username">Tên đăng nhập (*):</label>
+                <input type="text" id="username" class="required-field focusable">
+                <div class="field-error-msg" id="err-username">Vui lòng nhập tên đăng nhập.</div>
+            </div>
+            <div class="form-group">
+                <label for="password">Mật khẩu (*):</label>
+                <input type="password" id="password" class="required-field focusable">
+                <div class="field-error-msg" id="err-password">Vui lòng nhập mật khẩu.</div>
+            </div>
+            <div class="form-group">
+                <label for="repassword">Gõ lại mật khẩu (*):</label>
+                <input type="password" id="repassword" class="required-field focusable">
+                <div class="field-error-msg" id="err-repassword">Mật khẩu xác nhận không trùng khớp.</div>
+            </div>
+            <div class="btn-group">
+                <button type="submit" class="btn-submit">Chấp nhận</button>
+                <button type="reset" class="btn-reset">Làm lại</button>
+            </div>
+        </form>
+        <!-- Hiển thị thông tin sau khi đăng ký -->
+        <div id="result-msg"></div>
+    </div>
+    <script>
+        window.onload = function () {
+            document.getElementById("fullname").focus();
+        };
+        /* Nhấn Enter để chuyển sang ô tiếp theo */
+        var focusableInputs = document.querySelectorAll(".focusable");
+        focusableInputs.forEach(function (input, index) {
+            input.addEventListener("keydown", function (e) {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    if (index < focusableInputs.length - 1) {
+                        focusableInputs[index + 1].focus();
+                    }
+                }
+            });
+        });
+        /* Chuẩn hóa họ tên */
+        function normalizeName(input) {
+            var str = input.value.trim().replace(/\s+/g, ' ');
+            if (str !== "") {
+                var words = str.toLowerCase().split(' ');
+                for (var i = 0; i < words.length; i++) {
+                    words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+
+                }
+                input.value = words.join(' ');
+            }
+        }
+        /* Kiểm tra form */
+        function validateRegisterForm(e) {
+            var isValid = true;
+            var fullName = document.getElementById("fullname").value.trim();
+            var dob = document.getElementById("dob").value;
+            var email = document.getElementById("email").value.trim();
+            var username = document.getElementById("username").value.trim();
+            var password = document.getElementById("password").value;
+            var rePassword = document.getElementById("repassword").value;
+            /* Ẩn các lỗi cũ */
+            var errorMsgs = document.querySelectorAll(".field-error-msg");
+            errorMsgs.forEach(function (msg) {
+                msg.style.display = "none";
+            });
+            /* Xóa kết quả cũ */
+            document.getElementById("result-msg").style.display = "none";
+            /* Kiểm tra họ tên */
+            if (fullName === "") {
+                showError("err-fullname", "Họ tên không được để trống.");
+                isValid = false;
+            }
+            /* Kiểm tra ngày sinh */
+            if (dob !== "") {
+                var selectedDate = new Date(dob);
+                if (isNaN(selectedDate.getTime())) {
+                    showError("err-dob", "Ngày sinh không hợp lệ.");
+                    isValid = false;
+                }
+            }
+            /* Kiểm tra email */
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email === "") {
+                showError("err-email", "Email không được để trống.");
+                isValid = false;
+            } else if (!emailRegex.test(email)) {
+                showError("err-email", "Email không hợp lệ (Ví dụ: abc@domain.com).");
+                isValid = false;
+            }
+            /* Kiểm tra username */
+            if (username === "") {
+                showError("err-username", "Tên đăng nhập không được để trống.");
+                isValid = false;
+            }
+            /* Kiểm tra password */
+            if (password === "") {
+                showError("err-password", "Mật khẩu không được để trống.");
+                isValid = false;
+            }
+            /* Kiểm tra nhập lại password */
+            if (rePassword === "") {
+                showError("err-repassword", "Vui lòng nhập lại mật khẩu.");
+                isValid = false;
+            } else if (password !== rePassword) {
+                showError("err-repassword", "Mật khẩu gõ lại không trùng khớp!");
+                isValid = false;
+            }
+            /* Nếu có lỗi */
+            if (!isValid) {
+                e.preventDefault();
+                return false;
+            }
+            /* Nếu hợp lệ */
+            alert("Đăng ký thành viên thành công!");
+            /* Hiển thị thông tin đã nhập */
+            var resultDiv = document.getElementById("result-msg");
+            resultDiv.style.display = "block";
+            resultDiv.innerHTML =
+                "<h3>THÔNG TIN THÀNH VIÊN ĐÃ ĐĂNG KÝ</h3>" +
+                "<table class='result-table'>" +
+                "<tr>" + "<td>Họ tên</td>" + "<td>" + fullName + "</td>" + "</tr>" +
+                "<tr>" + "<td>Ngày sinh</td>" + "<td>" + (dob !== "" ? dob : "Chưa nhập") + "</td>" + "</tr>" +
+                "<tr>" + "<td>Email</td>" + "<td>" + email + "</td>" + "</tr>" +
+                "<tr>" + "<td>Tên đăng nhập</td>" + "<td>" + username + "</td>" + "</tr>" +
+                "<tr>" + "<td>Mật khẩu</td>" + "<td>********</td>" + "</tr>" +
+                "</table>";
+            e.preventDefault();
+            return false;
+        }
+        /* Hàm hiển thị lỗi */
+        function showError(elementId, message) {
+            var el = document.getElementById(elementId);
+            if (el) {
+                el.innerText = message;
+                el.style.display = "block";
+                var inputId = elementId.replace("err-", "");
+                var input = document.getElementById(inputId);
+                if (input) {
+                    input.classList.add("input-error");
+                }
+            }
+        }
+        /* Khi người dùng nhập lại thì bỏ màu đỏ */
+        var allInputs = document.querySelectorAll(".focusable");
+        allInputs.forEach(function (input) {
+            input.addEventListener("input", function () {
+                input.classList.remove("input-error");
+                var errorMsg = document.getElementById("err-" + input.id);
+                if (errorMsg) {
+                    errorMsg.style.display = "none";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

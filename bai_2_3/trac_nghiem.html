@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang thi trắc nghiệm nhiều thể loại</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: "Times New Roman", serif;
+            margin: 0;
+            padding: 20px;
+            background: #FFFFFF;
+            color: #404040;
+        }
+        .tab-header {
+            margin-bottom: 25px;
+            border-bottom: 2px solid #D6E0DC;
+            padding-bottom: 5px;
+        }
+        .tab-btn {
+            font-family: "Times New Roman", serif;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            background: none;
+            color: #6F7775;
+            cursor: pointer;
+            margin-right: 25px;
+            padding: 7px 12px;
+            transition: 0.2s;
+        }
+        .tab-btn:hover {
+            color: #5B8798;
+        }
+        .tab-btn.active {
+            color: #345D6B;
+            border-bottom: 3px solid #5B8798;
+        }
+        .test-content {
+            display: none;
+        }
+        .test-content.active {
+            display: block;
+        }
+        h2 {
+            margin-top: 0;
+            margin-bottom: 25px;
+            color: #5B8798;
+            border-bottom: 1px solid #D6E0DC;
+            padding-bottom: 8px;
+        }
+        .question-block {
+            margin-bottom: 28px;
+            padding: 15px;
+            border-left: 4px solid #5B8798;
+            background: #F6F8F6;
+            border-radius: 4px;
+        }
+        .question-title {
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #404040;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 9px;
+            font-size: 15px;
+            color: #6F7775;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .options label:hover {
+            color: #5B8798;
+        }
+        .options input[type="radio"] {
+            accent-color: #5B8798;
+            margin-right: 7px;
+        }
+        .btn-submit {
+            padding: 9px 25px;
+            font-family: "Times New Roman", serif;
+            font-size: 15px;
+            font-weight: bold;
+            color: #FFFFFF;
+            background: #5B8798;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-submit:hover {
+            background: #345D6B;
+        }
+    </style>
+</head>
+<body>
+    <div class="tab-header">
+        <button class="tab-btn active" onclick="openTest(event, 'test1')">TEST 1</button>
+        <button class="tab-btn" onclick="openTest(event, 'test2')">TEST 2</button>
+    </div>
+    <div id="test1" class="test-content active">
+        <h2>Câu hỏi</h2>
+        <form onsubmit="return false;">
+            <div class="question-block">
+                <p class="question-title">Chọn ngôn ngữ lập trình web yêu thích:</p>
+                <div class="options">
+                    <label><input type="radio" name="lang" value="html" onclick="alert('Bạn đã chọn đáp án HTML')">HTML</label>
+                    <label><input type="radio" name="lang" value="css" onclick="alert('Bạn đã chọn đáp án CSS')">CSS</label>
+                    <label><input type="radio" name="lang" value="js" onclick="alert('Bạn đã chọn đáp án JavaScript')">JavaScript</label>
+                </div>
+            </div>
+            <div class="question-block">
+                <p class="question-title">Chọn độ tuổi của bạn:</p>
+                <div class="options">
+                    <label><input type="radio" name="age" value="young" onclick="alert('Bạn đã chọn đáp án <20>')">&lt;20</label>
+                    <label><input type="radio" name="age" value="middle" onclick="alert('Bạn đã chọn đáp án 20 - 30')">20 - 30</label>
+                    <label><input type="radio" name="age" value="old" onclick="alert('Bạn đã chọn đáp án >30')">&gt;30</label>
+                </div>
+            </div>
+            <button type="button" class="btn-submit" onclick="submitTest('TEST 1', this.form)">Submit</button>
+        </form>
+    </div>
+    <div id="test2" class="test-content">
+        <h2>Câu hỏi</h2>
+        <form onsubmit="return false;">
+            <div class="question-block">
+                <p class="question-title">1. Ngôn ngữ nào chạy chủ yếu trên máy khách (Client-side)?</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="php" onclick="alert('Bạn đã chọn đáp án PHP')">PHP</label>
+                    <label><input type="radio" name="q1" value="js" onclick="alert('Bạn đã chọn đáp án JavaScript')">JavaScript</label>
+                    <label><input type="radio" name="q1" value="sql" onclick="alert('Bạn đã chọn đáp án SQL')">SQL</label>
+                </div>
+            </div>
+            <div class="question-block">
+                <p class="question-title">2. Thẻ nào trong HTML dùng để nhúng file CSS external?</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="script" onclick="alert('Bạn đã chọn đáp án <script>')">&lt;script&gt;</label>
+                    <label><input type="radio" name="q2" value="style" onclick="alert('Bạn đã chọn đáp án <style>')">&lt;style&gt;</label>
+                    <label><input type="radio" name="q2" value="link" onclick="alert('Bạn đã chọn đáp án <link>')">&lt;link&gt;</label>
+                </div>
+            </div>
+            <button type="button" class="btn-submit" onclick="submitTest('TEST 2', this.form)">Submit</button>
+        </form>
+    </div>
+    <script>
+        function openTest(evt, testName) {
+            var i;
+            var testContent;
+            var tabBtns;
+            testContent = document.getElementsByClassName("test-content");
+            for (i = 0; i < testContent.length; i++) {
+                testContent[i].style.display = "none";
+                testContent[i].classList.remove("active");
+            }
+            tabBtns = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tabBtns.length; i++) {
+                tabBtns[i].classList.remove("active");
+            }
+            document.getElementById(testName).style.display = "block";
+            document.getElementById(testName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+        function submitTest(testTitle, form) {
+            alert("Bạn đã hoàn thành bài thi: " + testTitle);
+            form.reset();
+        }
+    </script>
+</body>
+</html>

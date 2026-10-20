@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoạt cảnh</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: "Times New Roman", serif;
+            background: #FFFFFF;
+            color: #404040;
+            padding: 20px;
+        }
+        .animation-box {
+            text-align: center;
+            padding-top: 20px;
+        }
+        .btn-group {
+            margin-bottom: 20px;
+        }
+        .btn-group button {
+            padding: 7px 18px;
+            margin: 0 5px;
+            font-family: "Times New Roman", serif;
+            font-size: 14px;
+            font-weight: bold;
+            color: #345D6B;
+            background: #EEF3F1;
+            border: 1px solid #5B8798;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .btn-group button:hover {
+            background: #5B8798;
+            color: #FFFFFF;
+        }
+        .btn-group button:active {
+            background: #345D6B;
+            color: #FFFFFF;
+        }
+        /* Khung hiển thị hoạt cảnh */
+        .character-container {
+            width: 500px;
+            height: 320px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #EEF3F1;
+            border: 2px solid #5B8798;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .character-container img {
+            max-width: 100%;
+            max-height: 280px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div class="animation-box">
+        <div class="btn-group">
+            <button onclick="startAnimation()">Jump</button>
+            <button onclick="stopAnimation()">Stop</button>
+        </div>
+        <!-- Khung hoạt cảnh -->
+        <div class="character-container" id="character-box">
+            <img id="character-image" src="../image/jump_0.png" alt="Chibi Jump Animation">
+        </div>
+    </div>
+    <script>
+        const frames = ["../image/jump_0.png", "../image/jump_1.png", "../image/jump_2.png", "../image/jump_3.png"];
+        let currentIndex = 0;
+        let direction = 1;
+        let timer = null;
+        const characterImage = document.getElementById("character-image");
+        // Hiển thị ảnh đầu tiên
+        characterImage.src = frames[0];
+        // Chuyển sang frame tiếp theo
+        function nextFrame() {
+            currentIndex += direction;
+            // Đến ảnh cuối thì quay ngược lại
+            if (currentIndex === frames.length - 1) {
+                direction = -1;
+            }
+            // Đến ảnh đầu thì đi tới
+            else if (currentIndex === 0) {
+                direction = 1;
+            }
+            characterImage.src = frames[currentIndex];
+        }
+        // Nút Jump
+        function startAnimation() {
+            // Không tạo thêm timer nếu animation đang chạy
+            if (timer === null) {
+                timer = setInterval(nextFrame, 200);
+            }
+        }
+        // Nút Stop
+        function stopAnimation() {
+            if (timer !== null) {
+                clearInterval(timer);
+                timer = null;
+            }
+        }
+    </script>
+</body>
+</html>

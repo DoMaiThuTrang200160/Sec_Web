@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form nhập liệu table LOP</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: "Times New Roman", serif;
+            background: #FFFFFF;
+            color: #404040;
+            padding: 20px;
+        }
+        .form-wrapper {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #D6E0DC;
+            border-radius: 5px;
+            background: #F6F8F6;
+        }
+        .form-wrapper h2 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #5B8798;
+            border-bottom: 1px solid #D6E0DC;
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #345D6B;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #D6E0DC;
+            border-radius: 4px;
+            font-family: "Times New Roman", serif;
+            font-size: 14px;
+            background: #FFFFFF;
+            color: #404040;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #5B8798;
+            box-shadow: 0 0 4px rgba(91, 135, 152, 0.25);
+        }
+        .form-group input::placeholder {
+            color: #6F7775;
+        }
+        .input-error {
+            border: 1px solid #D9534F !important;
+            background-color: #FDECEC !important;
+        }
+        .input-error:focus {
+            border-color: #D9534F !important;
+            box-shadow: 0 0 4px rgba(217, 83, 79, 0.3) !important;
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 10px;
+            background-color: #5B8798;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: "Times New Roman", serif;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .btn-submit:hover {
+            background-color: #345D6B;
+        }
+        #error-msg {
+            color: #345D6B;
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 14px;
+            display: none;
+            background-color: #EEF3F1;
+            border: 1px solid #5B8798;
+            border-radius: 4px;
+        }
+        /* Khung hiển thị thông tin đã lưu */
+        #result-msg {
+            color: #345D6B;
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 15px;
+            display: none;
+            background-color: #EEF3F1;
+            border: 1px solid #5B8798;
+            border-radius: 4px;
+        }
+        #result-msg h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-align: center;
+            color: #345D6B;
+        }
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #FFFFFF;
+        }
+        .result-table td {
+            padding: 8px;
+            border: 1px solid #D6E0DC;
+        }
+        .result-table td:first-child {
+            width: 40%;
+            font-weight: bold;
+            color: #345D6B;
+            background-color: #F6F8F6;
+        }
+        .result-table td:last-child {
+            color: #404040;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-wrapper">
+        <h2>NHẬP DỮ LIỆU BẢNG LỚP</h2>
+        <div id="error-msg"></div>
+        <form onsubmit="return validateFormLop()">
+            <div class="form-group">
+                <label for="malop">Mã Lớp:</label>
+                <input type="text" id="malop" placeholder="Ví dụ: AT18G">
+            </div>
+            <div class="form-group">
+                <label for="tenlop">Tên Lớp:</label>
+                <input type="text" id="tenlop" placeholder="Ví dụ: An toàn thông tin 18G">
+            </div>
+            <div class="form-group">
+                <label for="khoahoc">Khóa Học:</label>
+                <input type="text" id="khoahoc" placeholder="Ví dụ: 18">
+            </div>
+            <div class="form-group">
+                <label for="gvcn">Giáo Viên Chủ Nhiệm:</label>
+                <input type="text" id="gvcn" placeholder="Nhập tên GVCN">
+            </div>
+            <button type="submit" class="btn-submit">LƯU DỮ LIỆU</button>
+        </form>
+        <!-- Hiển thị thông tin sau khi lưu -->
+        <div id="result-msg"></div>
+    </div>
+    <script>
+        function validateFormLop() {
+            var maLopInput = document.getElementById("malop");
+            var tenLopInput = document.getElementById("tenlop");
+            var khoaHocInput = document.getElementById("khoahoc");
+            var gvcnInput = document.getElementById("gvcn");
+            var maLop = maLopInput.value.trim();
+            var tenLop = tenLopInput.value.trim();
+            var khoaHoc = khoaHocInput.value.trim();
+            var gvcn = gvcnInput.value.trim();
+            var errorMessage = "";
+            var errorDiv = document.getElementById("error-msg");
+            var resultDiv = document.getElementById("result-msg");
+            // Xóa thông báo và trạng thái lỗi cũ
+            errorDiv.style.display = "none";
+            resultDiv.style.display = "none";
+            clearErrors();
+            // Kiểm tra Mã lớp
+            if (maLop === "") {
+                errorMessage = "Mã lớp không được để trống.";
+                showError(maLopInput);
+            } else if (maLop.length > 6) {
+                errorMessage = "Mã lớp không được quá 6 ký tự.";
+                showError(maLopInput);
+            }
+            // Kiểm tra Tên lớp
+            else if (tenLop === "") {
+                errorMessage = "Tên lớp không được để trống.";
+                showError(tenLopInput);
+            } else if (tenLop.length > 50) {
+                errorMessage = "Tên lớp không được quá 50 ký tự.";
+                showError(tenLopInput);
+            }
+            // Kiểm tra Khóa học
+            else if (khoaHoc === "") {
+                errorMessage = "Khóa học không được để trống.";
+                showError(khoaHocInput);
+            } else if (
+                isNaN(khoaHoc) ||
+                parseInt(khoaHoc) <= 0 ||
+                !Number.isInteger(Number(khoaHoc))
+            ) {
+                errorMessage = "Khóa học phải là một số nguyên dương.";
+                showError(khoaHocInput);
+            }
+            // Kiểm tra GVCN
+            else if (gvcn === "") {
+                errorMessage = "Tên GVCN không được để trống.";
+                showError(gvcnInput);
+            } else if (gvcn.length > 50) {
+                errorMessage = "Tên GVCN không được quá 50 ký tự.";
+                showError(gvcnInput);
+            }
+            // Nếu có lỗi
+            if (errorMessage !== "") {
+                errorDiv.style.display = "block";
+                errorDiv.innerHTML = "⚠ " + errorMessage;
+                return false;
+            }
+            // Nếu dữ liệu hợp lệ
+            alert("Dữ liệu bảng LỚP hợp lệ! Đang lưu...");
+            // Hiển thị thông tin đã lưu
+            resultDiv.style.display = "block";
+            resultDiv.innerHTML =
+                "<h3>ĐÃ LƯU THÔNG TIN VÀO TABLE LOP</h3>" +
+                "<table class='result-table'>" +
+                "<tr>" + "<td>Mã lớp:</td>" + "<td>" + maLop + "</td>" + "</tr>" +
+                "<tr>" + "<td>Tên lớp:</td>" + "<td><strong>" + tenLop + "</strong></td>" + "</tr>" +
+                "<tr>" + "<td>Khóa học:</td>" + "<td>" + khoaHoc + "</td>" + "</tr>" +
+                "<tr>" + "<td>Giáo viên chủ nhiệm:</td>" + "<td>" + gvcn + "</td>" + "</tr>" +
+                "</table>";
+            // Không submit form thật
+            return false;
+        }
+        // Thêm màu đỏ cho ô nhập sai
+        function showError(input) {
+            input.classList.add("input-error");
+        }
+        // Xóa màu đỏ ở tất cả các ô
+        function clearErrors() {
+            var inputs = document.querySelectorAll(".form-group input");
+            inputs.forEach(function(input) {
+                input.classList.remove("input-error");
+            });
+        }
+        // Khi người dùng sửa ô sai thì bỏ màu đỏ
+        var inputs = document.querySelectorAll(".form-group input");
+        inputs.forEach(function(input) {
+            input.addEventListener("input", function() {
+                input.classList.remove("input-error");
+            });
+        });
+    </script>
+</body>
+</html>

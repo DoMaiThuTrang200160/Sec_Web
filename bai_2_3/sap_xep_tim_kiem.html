@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sắp xếp và tìm kiếm trên bảng</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: "Times New Roman", serif;
+            background: #FFFFFF;
+            color: #404040;
+            padding: 25px;
+        }
+        .page-title {
+            text-align: center;
+            color: #345D6B;
+            margin: 0 0 20px 0;
+            font-size: 24px;
+        }
+        /* KHU VỰC CHỨC NĂNG */
+        .toolbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 20px;
+            padding: 15px;
+            margin-bottom: 12px;
+            background: #EEF3F1;
+            border: 1px solid #D6E0DC;
+            border-radius: 6px;
+        }
+        .sort-area, .search-area {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .sort-area {
+            align-items: flex-start;
+        }
+        .search-area {
+            align-items: flex-end;
+        }
+        .function-label {
+            font-weight: bold;
+            color: #345D6B;
+        }
+        .sort-controls, .search-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        select, .search-input, .search-button, .sort-button {
+            padding: 7px 10px;
+            font-family: "Times New Roman", serif;
+            font-size: 14px;
+            border-radius: 4px;
+            outline: none;
+        }
+        select, .search-input {
+            border: 1px solid #D6E0DC;
+            background: #FFFFFF;
+            color: #404040;
+        }
+        select:focus, .search-input:focus {
+            border-color: #5B8798;
+        }
+        .sort-button, .search-button {
+            font-weight: bold;
+            color: #345D6B;
+            background: #FFFFFF;
+            border: 1px solid #5B8798;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .sort-button:hover, .search-button:hover {
+            background: #5B8798;
+            color: #FFFFFF;
+        }
+        .sort-button:active, .search-button:active {
+            background: #345D6B;
+            color: #FFFFFF;
+        }
+        .search-input {
+            width: 220px;
+        }
+        /* TRẠNG THÁI */
+        .search-status {
+            min-height: 34px;
+            padding: 8px 12px;
+            margin-bottom: 12px;
+            border-left: 3px solid #5B8798;
+            background: #F6F8F6;
+            color: #404040;
+            font-size: 14px;
+        }
+        /* BẢNG */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #D6E0DC;
+            padding: 8px 10px;
+            text-align: left;
+        }
+        .data-table th {
+            background-color: #EEF3F1;
+            color: #345D6B;
+            font-weight: bold;
+            user-select: none;
+        }
+        .data-table tbody tr:nth-child(even) {
+            background-color: #F6F8F6;
+        }
+        .data-table tbody tr:hover {
+            background-color: #EEF3F1;
+        }
+        .sortable {
+            cursor: pointer;
+        }
+        .sortable:hover {
+            background-color: #D6E0DC;
+        }
+        .sort-icon {
+            margin-left: 5px;
+            font-size: 12px;
+        }
+        mark {
+            background-color: #D6E0DC;
+            color: #345D6B;
+            padding: 0 2px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="page-title">SẮP XẾP VÀ TÌM KIẾM TRÊN BẢNG</h1>
+    <!-- KHU VỰC SẮP XẾP + TÌM KIẾM -->
+    <div class="toolbar">
+        <!-- SẮP XẾP - CĂN TRÁI -->
+        <div class="sort-area">
+            <div class="function-label">Sắp xếp</div>
+            <div class="sort-controls">
+                <select id="sortOrder">
+                    <option value="default">Mặc định - Mã sản phẩm</option>
+                    <option value="asc">Tên sản phẩm: A → Z</option>
+                    <option value="desc">Tên sản phẩm: Z → A</option>
+                </select>
+                <button class="sort-button" onclick="sortBySelectedOrder()">Sắp xếp</button>
+            </div>
+        </div>
+        <!-- TÌM KIẾM - CĂN PHẢI -->
+        <div class="search-area">
+            <div class="function-label">Tìm kiếm</div>
+            <div class="search-controls">
+                <input type="text" id="searchInput" class="search-input" placeholder="Nhập mã hoặc tên sản phẩm">
+                <button class="search-button" onclick="searchProducts()">Tìm kiếm</button>
+            </div>
+        </div>
+    </div>
+    <!-- TRẠNG THÁI TÌM KIẾM -->
+    <div class="search-status" id="searchStatus">Hiển thị tất cả 5 sản phẩm.</div>
+    <!-- BẢNG SẢN PHẨM -->
+    <table class="data-table" id="productTable">
+        <thead>
+            <tr>
+                <th>TT</th>
+                <th class="sortable" onclick="sortTable(1)">Mã sản phẩm<span class="sort-icon"></span></th>
+                <th class="sortable" onclick="sortTable(2)">Tên sản phẩm<span class="sort-icon"></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>SP001</td>
+                <td>Máy giặt</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>SP002</td>
+                <td>Bếp đa năng</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>SP003</td>
+                <td>Lò sưởi</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>SP004</td>
+                <td>Điều hòa nhiệt độ</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>SP005</td>
+                <td>Tủ lạnh</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        /* LƯU DỮ LIỆU BAN ĐẦU */
+        const originalData = [];
+        const tableBody = document.querySelector("#productTable tbody");
+        const rows = Array.from(tableBody.querySelectorAll("tr"));
+        rows.forEach(row => {
+            const cells = row.querySelectorAll("td");
+            originalData.push({
+                code: cells[1].innerText.trim(),
+                name: cells[2].innerText.trim()
+            });
+        });
+        const totalProducts = originalData.length;
+        /* BIẾN QUẢN LÝ SẮP XẾP */
+        let currentSortColumn = -1;
+        let currentSortAsc = true;
+        /* SẮP XẾP THEO LỰA CHỌN */
+        function sortBySelectedOrder() {
+            const sortOrder = document.getElementById("sortOrder").value;
+            /* Sắp xếp mặc định theo mã sản phẩm */
+            if (sortOrder === "default") {
+                currentSortColumn = 1;
+                currentSortAsc = true;
+                originalData.sort((a, b) => {
+                    return a.code.localeCompare(b.code, "vi", { sensitivity: "base" });
+                });
+            }
+            /* Sắp xếp tên sản phẩm A → Z */
+            else if (sortOrder === "asc") {
+                currentSortColumn = 2;
+                currentSortAsc = true;
+                sortDataByName();
+            }
+            /* Sắp xếp tên sản phẩm Z → A */
+            else if (sortOrder === "desc") {
+                currentSortColumn = 2;
+                currentSortAsc = false;
+                sortDataByName();
+            }
+            renderTable();
+            updateSortIcon();
+            searchProducts(false);
+        }
+        /* SẮP XẾP DỮ LIỆU THEO TÊN */
+        function sortDataByName() {
+            originalData.sort((a, b) => {
+                const result = a.name.localeCompare( b.name, "vi", { sensitivity: "base" });
+                return currentSortAsc ? result : -result;
+            });
+        }
+        /* SẮP XẾP KHI CLICK TIÊU ĐỀ CỘT */
+        function sortTable(columnIndex) {
+            if (currentSortColumn === columnIndex) {
+                currentSortAsc = !currentSortAsc;
+            } else {
+                currentSortColumn = columnIndex;
+                currentSortAsc = true;
+            }
+            originalData.sort((a, b) => {
+                let valA;
+                let valB;
+                if (columnIndex === 1) {
+                    valA = a.code;
+                    valB = b.code;
+                } else {
+                    valA = a.name;
+                    valB = b.name;
+                }
+                const result = valA.localeCompare(valB, "vi", { sensitivity: "base" });
+                return currentSortAsc ? result : -result;
+            });
+            renderTable();
+            updateSortIcon();
+            searchProducts(false);
+        }
+        /* CẬP NHẬT MŨI TÊN SẮP XẾP */
+        function updateSortIcon() {
+            const headers = document.querySelectorAll(".data-table th .sort-icon");
+            headers.forEach((icon, index) => {
+                const columnIndex = index + 1;
+                if (columnIndex === currentSortColumn) {
+                    icon.innerHTML = currentSortAsc ? "&#9650;" : "&#9660;";
+                } else {
+                    icon.innerHTML = "";
+                }
+            });
+        }
+        /* HIỂN THỊ LẠI BẢNG */
+        function renderTable() {
+            tableBody.innerHTML = "";
+            originalData.forEach(
+                (item, index) => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td class="col-code">${escapeHTML(item.code)}</td>
+                        <td class="col-name">${escapeHTML(item.name)}</td>
+                    `;
+                    tableBody.appendChild(tr);
+                }
+            );
+        }
+        /* TÌM KIẾM SẢN PHẨM */
+        function searchProducts(updateStatus = true) {
+            const keyword = document.getElementById("searchInput").value.trim();
+            const trs = tableBody.querySelectorAll("tr");
+            let resultCount = 0;
+            trs.forEach((tr, index) => {
+                const item = originalData[index];
+                const code = item.code;
+                const name = item.name;
+                /* Nếu không nhập từ khóa */
+                if (keyword === "") {
+                    tr.style.display = "";
+                    tr.children[1].innerHTML = escapeHTML(code);
+                    tr.children[2].innerHTML = escapeHTML(name);
+                    resultCount++;
+                    return;
+                }
+                /* Tạo biểu thức tìm kiếm */
+                const regex = new RegExp(`(${escapeRegExp(keyword)})`, "gi");
+                const matchCode = code.match(regex);
+                const matchName = name.match(regex);
+                /* Có kết quả */
+                if (matchCode || matchName) {
+                    tr.style.display = "";
+                    tr.children[1].innerHTML = highlightText(code, keyword);
+                    tr.children[2].innerHTML = highlightText(name, keyword);
+                    resultCount++;
+                }
+                /* Không có kết quả */
+                else {
+                    tr.style.display = "none";
+                }
+            });
+            /* Cập nhật trạng thái */
+            if (updateStatus) {
+                updateSearchStatus(keyword, resultCount);
+            }
+        }
+        /* HIỂN THỊ TRẠNG THÁI TÌM KIẾM */
+        function updateSearchStatus(keyword, resultCount) {
+            const status = document.getElementById("searchStatus");
+            if (keyword === "") {
+                status.innerHTML = `Hiển thị tất cả <strong>${totalProducts}</strong> sản phẩm.`;
+                return;
+            }
+            if (resultCount === 0) {
+                status.innerHTML = `Không tìm thấy sản phẩm phù hợp với từ khóa "<strong>${escapeHTML(keyword)}</strong>". Kết quả: <strong>0 / ${totalProducts}</strong>.`;
+            } else {
+                status.innerHTML = `Tìm thấy <strong>${resultCount}</strong>/<strong>${totalProducts}</strong> sản phẩm với từ khóa "<strong>${escapeHTML(keyword)}</strong>".`;
+            }
+        }
+        /* TÔ SÁNG TỪ KHÓA */
+        function highlightText( text, keyword) {
+            if (!keyword) {
+                return escapeHTML(text);
+            }
+            const regex = new RegExp(`(${escapeRegExp(keyword)})`, "gi");
+            return escapeHTML(text).replace(regex, "<mark>$1</mark>");
+        }
+        /* ESCAPE HTML */
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, tag => ({
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    "'": "&#39;",
+                    '"': "&quot;"
+                }[tag] || tag));
+        }
+        /* ESCAPE REGEX */
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        }
+    </script>
+</body>
+</html>

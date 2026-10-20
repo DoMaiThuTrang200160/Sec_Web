@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang giới thiệu thông tin cá nhân - Đỗ Mai Thu Trang</title>
+    <style>
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #EEF3EF;
+            color: #404040;
+        }
+        .container {
+            width: 900px;
+            margin: 0 auto;
+            background-color: #FFF;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .banner {
+            background-color: #D6E0DC;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #345D6B;
+            text-transform: uppercase;
+        }
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid #D6E0DC;
+        }
+        .logo h1 {
+            margin: 0;
+            color: #5B8798;
+            font-size: 28px;
+        }
+        .logo span {
+            font-size: 14px;
+            color: #6F7775;
+        }
+        .menu a {
+            text-decoration: none;
+            color: #404040;
+            margin-left: 15px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .menu a:hover {
+            color: #5B8798;
+        }
+        .main-content {
+            display: flex;
+            padding: 40px;
+        }
+        .sidebar {
+            width: 30%;
+            padding-right: 30px;
+            border-right: 1px dashed #B8C8C4;
+        }
+        .sidebar h3 {
+            color: #5B8798;
+        }
+        .skills-list {
+            list-style-type: square;
+            padding-left: 20px;
+            color: #404040;
+            line-height: 1.8;
+        }
+        .btn-contact {
+            background-color: #5B8798;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: bold;
+            width: 100%;
+        }
+        .btn-contact:hover {
+            background-color: #345D6B;
+        }
+        .profile-info {
+            width: 70%;
+            padding-left: 30px;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .avatar-frame {
+            border: 1px solid #ccc;
+            padding: 5px;
+            width: 120px;
+            height: 120px;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        .avatar-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
+        }
+        .info-list {
+            padding: 0;
+            line-height: 1.8;
+            font-size: 14px;
+            list-style-type: disc;
+        }
+        .bio-text {
+            font-size: 14px;
+            color: #666;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+        footer {
+            background-color: #345D6B;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="banner" style="height: 120px;">
+            <img src="../image/banner.jpg" style="width: 900px; height: 120px;">
+        </div>
+        <div class="top-nav">
+            <div class="logo">
+                <h1>Đỗ Mai Thu Trang</h1>
+                <span>Information Security</span>
+            </div>
+            <div class="menu">
+                <a href="#">TRANG CHỦ</a>
+                <a href="#">GIỚI THIỆU</a>
+                <a href="#">CÔNG VIỆC</a>
+                <a href="#">MẠNG XÃ HỘI</a>
+                <a href="#">LIÊN HỆ</a>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="sidebar">
+                <h3>Những Thứ Tớ Giỏi...</h3>
+                <ul class="skills-list">
+                    <li>Tiếng Anh</li>
+                    <li>Tin học văn phòng</li>
+                    <li>Web Security</li>
+                    <li>Python, Java, SQL</li>
+                </ul>
+                <button class="btn-contact">LIÊN HỆ VỚI TỚ</button>
+            </div>
+            <div class="profile-info">
+                <h2>Chào! Tớ là Trang</h2>
+                <div class="profile-header">
+                    <div class="avatar-frame">
+                        <img src="../image/anh-ca-nhan.jpg" alt="Ảnh đại diện">
+                    </div>
+                    <ul class="info-list">
+                        <li>Tớ hiện đang là sinh viên Học viện Kỹ thuật mật mã</li>
+                        <li>Tên: Đỗ Mai Thu Trang</li>
+                        <li>Chuyên ngành: An toàn thông tin</li>
+                        <li>CPA: 3.19/4.0</li>
+                        <li>Email: domaithutrang.work@gmail.com</li>
+                        <li>Điện thoại: 0327174959</li>
+                    </ul>
+                </div>
+                <div class="bio-text">
+                    <p>Mình là sinh viên An toàn thông tin, định hướng SOC/Blue Team, tập trung vào giám sát hệ thống, phân tích log và hỗ trợ xử lý sự cố an ninh mạng.</p>
+                    <p>Đặc điểm nhận dạng: Hả, nói to lên bạn không nghe thấy 🤡</p>
+                </div>
+            </div>
+        </div>
+        <footer>© 2026 Đỗ Mai Thu Trang</footer>
+    </div>
+</body>
+</html>

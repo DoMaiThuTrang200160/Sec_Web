@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giao diện tin tức</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: "Times New Roman", serif;
+            background: #FFFFFF;
+            color: #404040;
+            padding: 20px;
+        }
+        .news-wrapper {
+            width: 100%;
+        }
+        .news-wrapper h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #345D6B;
+        }
+        .news-tabs {
+            display: flex;
+            border-bottom: 2px solid #5B8798;
+            background-color: #F6F8F6;
+            padding-left: 10px;
+            padding-top: 10px;
+        }
+        .news-tab-item {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #6F7775;
+            background-color: #EEF3F1;
+            border: 1px solid #D6E0DC;
+            border-bottom: none;
+            margin-right: 5px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .news-tab-item:hover {
+            background-color: #D6E0DC;
+            color: #345D6B;
+        }
+        .news-tab-item.active {
+            background-color: #5B8798;
+            color: #FFFFFF;
+            border-color: #5B8798;
+        }
+        .news-content-box {
+            border: 1px solid #D6E0DC;
+            border-top: none;
+            padding: 20px;
+            background-color: #FFFFFF;
+            min-height: 250px;
+        }
+        .tab-panel {
+            display: none;
+        }
+        .tab-panel.active {
+            display: block;
+        }
+        .news-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #D6E0DC;
+        }
+        .news-item:last-child {
+            border-bottom: none;
+        }
+        .news-item h4 {
+            margin: 0 0 5px 0;
+            color: #345D6B;
+        }
+        .news-item p {
+            margin: 0;
+            font-size: 14px;
+            color: #6F7775;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="news-wrapper">
+        <h2>TIN TỨC CẬP NHẬT</h2>
+        <div class="news-tabs">
+            <div class="news-tab-item active" onclick="switchNewsTab(this, 'tab1')">Thời sự</div>
+            <div class="news-tab-item" onclick="switchNewsTab(this, 'tab2')">Công nghệ</div>
+            <div class="news-tab-item" onclick="switchNewsTab(this, 'tab3')">Bảo mật</div>
+        </div>
+        <div class="news-content-box">
+            <div id="tab1" class="tab-panel active">
+                <div class="news-item">
+                    <h4>Hội thảo Phát triển Nguồn nhân lực Chuyển đổi số 2026</h4>
+                    <p>Các chuyên gia hàng đầu thảo luận về chiến lược đào tạo và phát triển hạ tầng số cho các trường đại học toàn quốc.</p>
+                </div>
+                <div class="news-item">
+                    <h4>Xây dựng Đô thị thông minh tại các thành phố lớn</h4>
+                    <p>Tăng cường ứng dụng công nghệ IoT và AI trong quản lý giao thông và quy hoạch đô thị.</p>
+                </div>
+            </div>
+            <div id="tab2" class="tab-panel">
+                <div class="news-item">
+                    <h4>Ra mắt Chip vi xử lý thế hệ mới với hiệu năng đột phá</h4>
+                    <p>Dòng vi xử lý tích hợp AI accelerator giúp tối ưu hóa tốc độ xử lý dữ liệu và tiết kiệm điện năng hơn 30%.</p>
+                </div>
+                <div class="news-item">
+                    <h4>Xu hướng phát triển ứng dụng Web 2026</h4>
+                    <p>Sự kết hợp giữa WebAssembly và các Framework JavaScript hiện đại mang lại trải nghiệm tương đương phần mềm Desktop.</p>
+                </div>
+            </div>
+            <div id="tab3" class="tab-panel">
+                <div class="news-item">
+                    <h4>Cảnh báo các hình thức Tấn công Phishing mới</h4>
+                    <p>Các chuyên gia An toàn thông tin đưa ra khuyến cáo về các kỹ thuật lừa đảo tinh vi nhắm vào người dùng ngân hàng số.</p>
+                </div>
+                <div class="news-item">
+                    <h4>Diễn tập Phòng thủ Không gian mạng Quốc gia</h4>
+                    <p>Chương trình phối hợp ứng cứu sự cố an ninh mạng giữa các tổ chức và doanh nghiệp lớn.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function switchNewsTab(tabElement, tabId) {
+            var tabs = document.querySelectorAll(".news-tab-item");
+            tabs.forEach(function (tab) {
+                tab.classList.remove("active");
+            });
+            var panels = document.querySelectorAll(".tab-panel");
+            panels.forEach(function (panel) {
+                panel.classList.remove("active");
+            });
+            tabElement.classList.add("active");
+            document.getElementById(tabId).classList.add("active");
+        }
+    </script>
+</body>
+</html>

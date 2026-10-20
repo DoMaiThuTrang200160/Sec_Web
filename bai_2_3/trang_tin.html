@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cổng thông tin điện tử - Liên hiệp các Hội Khoa học và Kỹ thuật Việt Nam</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+            color: #333;
+        }
+        .wrapper {
+            max-width: 960px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-bottom: 3px solid #c0392b;
+        }
+        header .logo-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: #c0392b;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 11px;
+            text-align: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        header .title-block {
+            flex: 1;
+        }
+        header .title-block .sub {
+            color: #c0392b;
+            font-weight: bold;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+        header .title-block h1 {
+            color: #c0392b;
+            font-size: 22px;
+            margin: 4px 0 0 0;
+        }
+        header .search-box {
+            text-align: right;
+        }
+        header .search-box input {
+            padding: 4px;
+            font-size: 12px;
+            width: 100px;
+        }
+        .main-layout {
+            display: flex;
+            padding: 10px;
+            gap: 10px;
+        }
+        .col-left {
+            width: 150px;
+            flex-shrink: 0;
+        }
+        .nav-menu a {
+            display: block;
+            background-color: #f0d9d9;
+            color: #7a1f1f;
+            text-decoration: none;
+            padding: 8px 10px;
+            margin-bottom: 3px;
+            font-weight: bold;
+            font-size: 12px;
+            border-left: 4px solid #c0392b;
+        }
+        .nav-menu a:hover {
+            background-color: #e0b8b8;
+        }
+        .side-box {
+            background-color: #eef3f8;
+            border: 1px solid #cddcea;
+            text-align: center;
+            padding: 10px 5px;
+            margin-top: 10px;
+            font-size: 11px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .col-center {
+            flex: 1;
+            min-width: 0;
+        }
+        .col-center h2 {
+            color: #c0392b;
+            font-size: 15px;
+            margin: 0 0 4px 0;
+        }
+        .col-center .meta {
+            color: #888;
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+        .col-center p {
+            line-height: 1.7;
+            text-align: justify;
+            margin: 0 0 10px 0;
+        }
+        .col-right {
+            width: 160px;
+            flex-shrink: 0;
+        }
+        .partner-badge {
+            border: 1px solid #ccc;
+            background-color: #f7f7f7;
+            text-align: center;
+            padding: 12px 6px;
+            margin-bottom: 8px;
+            font-size: 11px;
+            font-weight: bold;
+            color: #444;
+        }
+        .partner-badge.blue {
+            background-color: #dceaf7;
+            color: #1a5276;
+        }
+        .partner-badge.green {
+            background-color: #e2f2e2;
+            color: #1e6b3c;
+        }
+        .partner-badge.orange {
+            background-color: #fbe9d9;
+            color: #a04000;
+        }
+        footer {
+            background-color: #c0392b;
+            color: #fff;
+            padding: 12px 20px;
+            font-size: 11px;
+        }
+        footer .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            line-height: 1.6;
+        }
+        footer .footer-grid div {
+            flex: 1;
+            min-width: 180px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <div class="logo-circle">LIÊN HIỆP<br>HỘI KH&amp;KT<br>VIỆT NAM</div>
+            <div class="title-block">
+                <div class="sub">CỔNG THÔNG TIN ĐIỆN TỬ</div>
+                <h1>LIÊN HIỆP CÁC HỘI KHOA HỌC VÀ KỸ THUẬT VIỆT NAM</h1>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Tìm kiếm...">
+            </div>
+        </header>
+        <div class="main-layout">
+            <div class="col-left">
+                <nav class="nav-menu">
+                    <a href="#">Trang tin điện tử</a>
+                    <a href="#">Diễn đàn</a>
+                    <a href="#">Dịch vụ công</a>
+                    <a href="#">Phổ biến kiến thức</a>
+                    <a href="#">Đào tạo từ xa</a>
+                    <a href="#">Hoạt động sáng tạo</a>
+                    <a href="#">Tư vấn phản biện</a>
+                    <a href="#">Thư điện tử</a>
+                </nav>
+                <div class="side-box">NHÀ XUẤT BẢN<br>TRI THỨC</div>
+                <div class="side-box">Trung tâm nghiên cứu<br>và hỗ trợ trẻ em</div>
+                <div class="side-box">Quỹ hỗ trợ sáng tạo<br>kỹ thuật Việt Nam</div>
+            </div>
+            <div class="col-center">
+                <h2>"Khu chung cư hiện đại của Thủ đô không... vùng sâu!"</h2>
+                <div class="meta">(15:18:27 Ngày 01/12/2010)</div>
+                <p>Trong những năm gần đây, tốc độ đô thị hóa tại các thành phố lớn diễn ra nhanh chóng, kéo theo sự xuất hiện của hàng loạt khu chung cư hiện đại nhằm đáp ứng nhu cầu nhà ở ngày càng tăng của người dân. Tuy nhiên, bên cạnh những mặt tích cực, quá trình quy hoạch và xây dựng vẫn còn tồn tại không ít bất cập cần được các cơ quan chức năng quan tâm giải quyết.</p>
+                <p>Theo đánh giá của nhiều chuyên gia trong lĩnh vực kiến trúc và xây dựng, việc phát triển hạ tầng đô thị cần đi đôi với công tác bảo vệ môi trường, đảm bảo không gian sống xanh và tiện ích công cộng cho cư dân. Đây cũng là một trong những nội dung được thảo luận sôi nổi tại các diễn đàn khoa học kỹ thuật gần đây do Liên hiệp Hội tổ chức.</p>
+                <p>(Đây là nội dung mock data phục vụ mục đích minh họa bố cục trang, không phải tin tức thật.)</p>
+            </div>
+            <div class="col-right">
+                <div class="partner-badge orange">KHOA HỌC<br>&amp; ĐỜI SỐNG</div>
+                <div class="partner-badge blue">HỘI SỬ HỌC<br>VIỆT NAM</div>
+                <div class="partner-badge green">HỘI BẢO VỆ<br>THIÊN NHIÊN &amp;<br>MÔI TRƯỜNG VN</div>
+                <div class="partner-badge">TỔNG HỘI<br>XÂY DỰNG<br>VIỆT NAM</div>
+                <div class="partner-badge blue">ĐỊA KỸ THUẬT</div>
+                <div class="partner-badge green">VnDG</div>
+                <div class="partner-badge orange">HỘI CAI NGHIỆN<br>TP.HCM</div>
+                <div class="partner-badge blue">UNDP<br>VIỆT NAM</div>
+                <div class="partner-badge">TCKT 8<br>Giải pháp mới<br>trong tự động hóa</div>
+                <div class="partner-badge green">CON NGƯỜI &amp;<br>THIÊN NHIÊN</div>
+            </div>
+        </div>
+        <footer>
+            <div class="footer-grid">
+                <div><b>LIÊN HIỆP CÁC HỘI KHOA HỌC VÀ KỸ THUẬT VIỆT NAM</b><br>Địa chỉ: 53 Nguyễn Du - Hà Nội - Việt Nam<br>Điện thoại: 04.9422206, 04.9422608</div>
+                <div>Fax: 04.8227921<br>Email: lienhiephoi@vusta.vn<br>Giấy phép số: 105/GP-BC ngày 02/03/2007</div>
+                <div>Trưởng ban Biên tập: Hoàng Quốc Trị</div>
+                <div style="text-align:right;">Đơn vị thiết kế<br>website</div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

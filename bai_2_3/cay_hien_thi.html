@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cây danh mục</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: "Times New Roman", serif;
+            background: #FFFFFF;
+            color: #404040;
+            padding: 20px;
+        }
+        .tree-wrapper {
+            width: 100%;
+        }
+        .tree-wrapper h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #345D6B;
+        }
+        .tree {
+            list-style: none;
+            padding-left: 10px;
+            font-size: 15px;
+        }
+        .tree ul {
+            list-style: none;
+            padding-left: 25px;
+            display: none;
+        }
+        .tree ul.active {
+            display: block;
+        }
+        .tree li {
+            margin: 6px 0;
+            line-height: 22px;
+        }
+        .toggle-btn {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            line-height: 16px;
+            text-align: center;
+            border: 1px solid #D6E0DC;
+            background-color: #EEF3F1;
+            color: #345D6B;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            margin-right: 6px;
+            user-select: none;
+            border-radius: 3px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .toggle-btn:hover {
+            background-color: #5B8798;
+            color: #FFFFFF;
+            border-color: #345D6B;
+        }
+        .folder-name {
+            font-weight: bold;
+            cursor: pointer;
+            color: #345D6B;
+        }
+        .folder-name:hover {
+            color: #5B8798;
+        }
+        .file-name {
+            color: #6F7775;
+        }
+    </style>
+</head>
+<body>
+    <div class="tree-wrapper">
+        <h2>CÂY DANH MỤC</h2>
+        <ul class="tree">
+            <li>
+                <span class="toggle-btn" onclick="toggleFolder(this)">+</span>
+                <span class="folder-name" onclick="toggleFolderText(this)">📁 Root</span>
+                <ul>
+                    <li>
+                        <span class="toggle-btn" onclick="toggleFolder(this)">+</span>
+                        <span class="folder-name" onclick="toggleFolderText(this)">📁 Folder 1 (Công nghệ)</span>
+                        <ul>
+                            <li>
+                                <span class="toggle-btn" onclick="toggleFolder(this)">+</span>
+                                <span class="folder-name" onclick="toggleFolderText(this)">📁 Lập trình Web</span>
+                                <ul>
+                                    <li>
+                                        <span class="file-name">📄 HTML5_Co_ban.pdf</span>
+                                    </li>
+                                    <li>
+                                        <span class="file-name">📄 CSS_Grid_Layout.docx</span>
+                                    </li>
+                                    <li>
+                                        <span class="file-name">📄 JS_DOM_Events.js</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span class="toggle-btn" onclick="toggleFolder(this)">+</span>
+                                <span class="folder-name" onclick="toggleFolderText(this)">📁 An toàn thông tin</span>
+                                <ul>
+                                    <li>
+                                        <span class="file-name">📄 Nmap_Scanning_Guide.pdf</span>
+                                    </li>
+                                    <li>
+                                        <span class="file-name">📄 Wireshark_Packet_Analysis.pcap</span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="toggle-btn" onclick="toggleFolder(this)">+</span>
+                        <span class="folder-name" onclick="toggleFolderText(this)">📁 Folder 2 (Tài liệu học tập)</span>
+                        <ul>
+                            <li>
+                                <span class="file-name">📄 De_thi_mau.pdf</span>
+                            </li>
+                            <li>
+                                <span class="file-name">📄 Slide_Bai_giang.pptx</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="file-name">📄 Readme.txt</span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <script>
+        function toggleFolder(btn) {
+            var parentLi = btn.parentElement;
+            var subUl = parentLi.querySelector("ul");
+            if (subUl) {
+                if (subUl.classList.contains("active")) {
+                    subUl.classList.remove("active");
+                    btn.innerText = "+";
+                } else {
+                    subUl.classList.add("active");
+                    btn.innerText = "-";
+                }
+            }
+        }
+        function toggleFolderText(folderSpan) {
+            var btn = folderSpan.previousElementSibling;
+            if (btn && btn.classList.contains("toggle-btn")) {
+                toggleFolder(btn);
+            }
+        }
+    </script>
+</body>
+</html>

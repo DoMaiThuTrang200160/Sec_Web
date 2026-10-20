@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách nhân sự</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: "Times New Roman", serif;
+            background: #FFFFFF;
+            color: #404040;
+            padding: 20px;
+        }
+        .table-wrapper {
+            width: 100%;
+            margin: 0 auto;
+        }
+        .table-wrapper h2 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #5B8798;
+            border-bottom: 1px solid #D6E0DC;
+            padding-bottom: 10px;
+        }
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .custom-table th, .custom-table td {
+            border: 1px solid #D6E0DC;
+            padding: 10px;
+            text-align: left;
+        }
+        .custom-table th {
+            background-color: #EEF3F1;
+            color: #345D6B;
+            font-weight: bold;
+        }
+        .custom-table tbody tr.even-row {
+            background-color: #FFFFFF;
+        }
+        .custom-table tbody tr.odd-row {
+            background-color: #F6F8F6;
+        }
+        .custom-table tbody tr:hover {
+            background-color: #DCE8E5 !important;
+            cursor: pointer;
+        }
+        .custom-table tbody tr.selected-row {
+            background-color: #E8F0EE !important;
+        }
+        .custom-table input[type="checkbox"] {
+            accent-color: #5B8798;
+            cursor: pointer;
+        }
+        /* Nhóm nút chức năng */
+        .action-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .btn-delete {
+            padding: 9px 15px;
+            background-color: #6F7775;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: "Times New Roman", serif;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .btn-delete:hover {
+            background-color: #404040;
+        }
+        /* Khu vực hiển thị nhân sự đã chọn */
+        #selected-info {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #D6E0DC;
+            border-radius: 5px;
+            background-color: #F6F8F6;
+        }
+        #selected-info h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            color: #345D6B;
+            font-size: 17px;
+        }
+        .selected-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .selected-table th, .selected-table td {
+            border: 1px solid #D6E0DC;
+            padding: 8px;
+        }
+        .selected-table th {
+            background-color: #EEF3F1;
+            color: #345D6B;
+        }
+        .selected-count {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #345D6B;
+        }
+        .empty-message {
+            color: #6F7775;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="table-wrapper">
+        <h2>DANH SÁCH NHÂN SỰ</h2>
+        <table class="custom-table" id="employeeTable">
+            <thead>
+                <tr>
+                    <th style="width: 40px; text-align: center;">
+                        <input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)">
+                    </th>
+                    <th>Mã NV</th>
+                    <th>Họ và Tên</th>
+                    <th>Chức vụ</th>
+                    <th>Phòng ban</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="even-row" onclick="handleRowClick(event, this)">
+                    <td style="text-align: center;">
+                        <input type="checkbox" class="row-checkbox" onchange="updateRowState(this)">
+                    </td>
+                    <td>NV001</td>
+                    <td>Trần Minh Nhật</td>
+                    <td>Nhân viên</td>
+                    <td>Kỹ thuật</td>
+                </tr>
+                <tr class="odd-row" onclick="handleRowClick(event, this)">
+                    <td style="text-align: center;">
+                        <input type="checkbox" class="row-checkbox" onchange="updateRowState(this)">
+                    </td>
+                    <td>NV002</td>
+                    <td>Hoàng Thu Phương</td>
+                    <td>Chuyên viên</td>
+                    <td>An toàn thông tin</td>
+                </tr>
+                <tr class="even-row" onclick="handleRowClick(event, this)">
+                    <td style="text-align: center;">
+                        <input type="checkbox" class="row-checkbox" onchange="updateRowState(this)">
+                    </td>
+                    <td>NV003</td>
+                    <td>Nguyễn Xuân Đức</td>
+                    <td>Lập trình viên</td>
+                    <td>Kỹ thuật</td>
+                </tr>
+                <tr class="odd-row" onclick="handleRowClick(event, this)">
+                    <td style="text-align: center;">
+                        <input type="checkbox" class="row-checkbox" onchange="updateRowState(this)">
+                    </td>
+                    <td>NV004</td>
+                    <td>Lê Tuyết Mai</td>
+                    <td>Kế toán viên</td>
+                    <td>Tài chính - Kế toán</td>
+                </tr>
+                <tr class="even-row" onclick="handleRowClick(event, this)">
+                    <td style="text-align: center;">
+                        <input type="checkbox" class="row-checkbox" onchange="updateRowState(this)">
+                    </td>
+                    <td>NV005</td>
+                    <td>Bùi Anh Khoa</td>
+                    <td>Quản trị hệ thống</td>
+                    <td>Kỹ thuật</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- Nút xóa nhân sự -->
+        <div class="action-group">
+            <button class="btn-delete" onclick="deleteSelectedEmployees()">Xóa nhân sự đã chọn</button>
+        </div>
+        <!-- Hiển thị nhân sự đã chọn -->
+        <div id="selected-info"></div>
+    </div>
+    <script>
+        /* Cập nhật trạng thái một dòng */
+        function updateRowState(checkbox) {
+            var row = checkbox.closest("tr");
+            if (checkbox.checked) {
+                row.classList.add("selected-row");
+            } else {
+                row.classList.remove("selected-row");
+            }
+            checkSelectAllStatus();
+            displaySelectedEmployees();
+        }
+        /* Chọn / bỏ chọn tất cả */
+        function toggleSelectAll(mainCheckbox) {
+            var checkboxes = document.querySelectorAll(".row-checkbox");
+            checkboxes.forEach(function (cb) {
+                cb.checked = mainCheckbox.checked;
+                var row = cb.closest("tr");
+                if (mainCheckbox.checked) {
+                    row.classList.add("selected-row");
+                } else {
+                    row.classList.remove("selected-row");
+                }
+            });
+            displaySelectedEmployees();
+        }
+        /* Click vào cả dòng để chọn */
+        function handleRowClick(event, row) {
+            if (event.target.tagName.toLowerCase() === "input") {
+                return;
+            }
+            var checkbox = row.querySelector(".row-checkbox");
+            checkbox.checked = !checkbox.checked;
+            updateRowState(checkbox);
+        }
+        /* Kiểm tra trạng thái checkbox "chọn tất cả" */
+        function checkSelectAllStatus() {
+            var checkboxes = document.querySelectorAll(".row-checkbox");
+            var selectAllCb = document.getElementById("selectAll");
+            var allChecked = true;
+            checkboxes.forEach(function (cb) {
+                if (!cb.checked) {
+                    allChecked = false;
+                }
+            });
+            selectAllCb.checked = allChecked && checkboxes.length > 0;
+        }
+        /* Hiển thị danh sách nhân sự đã chọn */
+        function displaySelectedEmployees() {
+            var selectedRows = document.querySelectorAll("#employeeTable tbody tr.selected-row");
+            var resultDiv = document.getElementById("selected-info");
+            /* Không có nhân sự nào được chọn */
+            if (selectedRows.length === 0) {
+                resultDiv.style.display = "none";
+                resultDiv.innerHTML = "";
+                return;
+            }
+            var html =
+                "<h3>NHÂN SỰ ĐÃ CHỌN</h3>" +
+                "<table class='selected-table'>" +
+                "<tr>" + "<th>Mã NV</th>" + "<th>Họ và Tên</th>" + "<th>Chức vụ</th>" + "<th>Phòng ban</th>" + "</tr>";
+            selectedRows.forEach(function (row) {
+                var cells = row.querySelectorAll("td");
+                var maNV = cells[1].innerText;
+                var hoTen = cells[2].innerText;
+                var chucVu = cells[3].innerText;
+                var phongBan = cells[4].innerText;
+                html +=
+                    "<tr>" + "<td>" + maNV + "</td>" + "<td>" + hoTen + "</td>" + "<td>" + chucVu + "</td>" +"<td>" + phongBan + "</td>" + "</tr>";
+            });
+            html +=
+                "</table>" +
+                "<div class='selected-count'>" +
+                "Tổng số: " + selectedRows.length + " nhân sự" +
+                "</div>";
+            resultDiv.innerHTML = html;
+            resultDiv.style.display = "block";
+        }
+        /* Xóa các nhân sự đã chọn */
+        function deleteSelectedEmployees() {
+            var selectedRows = document.querySelectorAll("#employeeTable tbody tr.selected-row");
+            /* Chưa chọn ai */
+            if (selectedRows.length === 0) {
+                alert("Vui lòng chọn ít nhất một nhân sự để xóa.");
+                return;
+            }
+            /* Xác nhận trước khi xóa */
+            var confirmDelete = confirm("Bạn có chắc chắn muốn xóa " + selectedRows.length + " nhân sự đã chọn không?");
+            if (!confirmDelete) {
+                return;
+            }
+            /* Xóa từng dòng */
+            selectedRows.forEach(function (row) {
+                row.remove();
+            });
+            /* Reset checkbox chọn tất cả */
+            document.getElementById("selectAll").checked = false;
+            /* Cập nhật lại khu vực hiển thị */
+            displaySelectedEmployees();
+            checkSelectAllStatus();
+            alert("Đã xóa nhân sự thành công!");
+        }
+    </script>
+</body>
+</html>

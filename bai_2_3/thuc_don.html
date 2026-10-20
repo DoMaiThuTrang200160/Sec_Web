@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh mục sản phẩm</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: "Times New Roman", serif;
+            background: #FFFFFF;
+            color: #404040;
+            padding: 20px;
+        }
+        .menu-layout {
+            display: flex;
+            gap: 20px;
+            min-height: 350px;
+        }
+        .menu-left {
+            width: 220px;
+            border-right: 2px solid #D6E0DC;
+            padding-right: 15px;
+        }
+        .menu-right {
+            flex: 1;
+            padding: 20px;
+            background-color: #F6F8F6;
+            border: 1px solid #D6E0DC;
+            border-radius: 6px;
+        }
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .category-item {
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            background-color: #EEF3F1;
+            border: 1px solid #D6E0DC;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #404040;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .category-item:hover {
+            background-color: #D6E0DC;
+            color: #345D6B;
+            box-shadow: 0 0 5px rgba(52, 93, 107, 0.15);
+        }
+        .category-item.active {
+            background-color: #5B8798 !important;
+            color: #FFFFFF !important;
+            border-color: #345D6B;
+        }
+        .selected-title {
+            font-size: 20px;
+            color: #345D6B;
+            margin-top: 0;
+            border-bottom: 2px solid #5B8798;
+            padding-bottom: 10px;
+        }
+        .selected-desc {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #6F7775;
+        }
+    </style>
+</head>
+<body>
+    <h2>DANH MỤC SẢN PHẨM</h2>
+    <div class="menu-layout">
+        <div class="menu-left">
+            <ul class="category-list">
+                <li class="category-item active" onclick="selectCategory(this, 'Thiết bị Điện tử', 'Bao gồm các sản phẩm Laptop, Điện thoại thông minh, Máy tính bảng và Linh kiện máy tính.')">Thiết bị Điện tử</li>
+                <li class="category-item" onclick="selectCategory(this, 'An toàn Thông tin', 'Bao gồm các giải pháp Phần mềm Diệt virus, Firewall, Thiết bị Mạng và Dịch vụ Pentest.')">An toàn Thông tin</li>
+                <li class="category-item" onclick="selectCategory(this, 'Phần mềm & Ứng dụng', 'Cung cấp Hệ điều hành, Phần mềm Văn phòng, Công cụ Lập trình và Đồ họa.')">Phần mềm & Ứng dụng</li>
+                <li class="category-item" onclick="selectCategory(this, 'Sách & Tài liệu IT', 'Tổng hợp Sách giáo trình, Giáo trình An toàn thông tin và Tài liệu kỹ thuật chuyên sâu.')">Sách & Tài liệu IT</li>
+                <li class="category-item" onclick="selectCategory(this, 'Khóa học Trực tuyến', 'Các khóa học Lập trình Web, Python, Pentest và SOC từ cơ bản đến nâng cao.')">Khóa học Trực tuyến</li>
+            </ul>
+        </div>
+        <div class="menu-right">
+            <h3 class="selected-title" id="categoryTitle">Thiết bị Điện tử</h3>
+            <p class="selected-desc" id="categoryDesc">Bao gồm các sản phẩm Laptop, Điện thoại thông minh, Máy tính bảng và Linh kiện máy tính.</p>
+        </div>
+    </div>
+    <script>
+        function selectCategory(element, title, description) {
+            var items = document.querySelectorAll(".category-item");
+            items.forEach(function (item) {
+                item.classList.remove("active");
+            });
+            element.classList.add("active");
+            document.getElementById("categoryTitle").innerText = title;
+            document.getElementById("categoryDesc").innerText = description;
+        }
+    </script>
+</body>
+</html>

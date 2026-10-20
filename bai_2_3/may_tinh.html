@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Máy tính bỏ túi</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: "Times New Roman", serif;
+            background-color: #EEF3F1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+        .calculator {
+            width: 290px;
+            background-color: #FFFFFF;
+            border: 1px solid #5B8798;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+        /* Màn hình máy tính */
+        .display-screen {
+            width: 100%;
+            height: 70px;
+            background-color: #EEF3F1;
+            border: 1px solid #5B8798;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            padding: 7px 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+        }
+        /* Dòng hiển thị phép tính */
+        #expression {
+            height: 22px;
+            text-align: left;
+            font-size: 16px;
+            color: #404040;
+            white-space: nowrap;
+        }
+        /* Dòng hiển thị kết quả */
+        #display {
+            height: 28px;
+            text-align: right;
+            font-size: 24px;
+            font-weight: bold;
+            color: #345D6B;
+            white-space: nowrap;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 7px;
+        }
+        button {
+            height: 45px;
+            border: none;
+            border-radius: 6px;
+            background-color: #5B8798;
+            color: #FFFFFF;
+            font-family: "Times New Roman", serif;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #345D6B;
+        }
+        button:active {
+            transform: scale(0.96);
+        }
+        .function {
+            background-color: #7C9BA6;
+        }
+        .operator {
+            background-color: #345D6B;
+        }
+        .equal {
+            background-color: #345D6B;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <!-- Màn hình -->
+        <div class="display-screen">
+            <div id="expression"></div>
+            <div id="display">0</div>
+        </div>
+        <!-- Các nút -->
+        <div class="buttons">
+            <button class="function" onclick="clearDisplay()">C</button>
+            <button class="function" onclick="clearEntry()">CE</button>
+            <button class="function" onclick="toggleSign()">+/-</button>
+            <button class="operator" onclick="appendOperator('%')">%</button>
+            <button onclick="appendNumber('7')">7</button>
+            <button onclick="appendNumber('8')">8</button>
+            <button onclick="appendNumber('9')">9</button>
+            <button class="operator" onclick="appendOperator('/')">/</button>
+            <button onclick="appendNumber('4')">4</button>
+            <button onclick="appendNumber('5')">5</button>
+            <button onclick="appendNumber('6')">6</button>
+            <button class="operator" onclick="appendOperator('*')">*</button>
+            <button onclick="appendNumber('1')">1</button>
+            <button onclick="appendNumber('2')">2</button>
+            <button onclick="appendNumber('3')">3</button>
+            <button class="operator" onclick="appendOperator('-')">-</button>
+            <button onclick="appendNumber('0')">0</button>
+            <button onclick="appendNumber('.')">.</button>
+            <button class="equal" onclick="calculate()">=</button>
+            <button class="operator" onclick="appendOperator('+')">+</button>
+        </div>
+    </div>
+    <script>
+        let display = document.getElementById("display");
+        let expression = document.getElementById("expression");
+        let currentInput = "0";
+        let operator = null;
+        let previousInput = null;
+        let shouldResetDisplay = false;
+        // Nhập số
+        function appendNumber(num) {
+            // Nếu màn hình đang là 0 hoặc vừa thực hiện phép tính
+            if (display.textContent === "0" || shouldResetDisplay) {
+                currentInput = num === "." ? "0." : num;
+                shouldResetDisplay = false;
+            } else {
+                // Không cho nhập nhiều dấu chấm
+                if (num === "." && currentInput.includes(".")) {
+                    return;
+                }
+                currentInput += num;
+            }
+            display.textContent = currentInput;
+        }
+        // Nhập phép toán
+        function appendOperator(op) {
+            // Nếu đang có phép toán trước đó và chưa bấm = thì thực hiện phép toán trước
+            if (operator !== null && !shouldResetDisplay) {
+                calculate();
+            }
+            previousInput = currentInput;
+            operator = op;
+            shouldResetDisplay = true;
+            // Hiển thị phép tính ở dòng trên
+            expression.textContent = previousInput + " " + op;
+        }
+        // Xóa toàn bộ
+        function clearDisplay() {
+            currentInput = "0";
+            previousInput = null;
+            operator = null;
+            shouldResetDisplay = false;
+            display.textContent = "0";
+            expression.textContent = "";
+        }
+        // Xóa số hiện tại
+        function clearEntry() {
+            currentInput = "0";
+            display.textContent = "0";
+        }
+        // Đổi dấu +/-
+        function toggleSign() {
+            if (currentInput !== "0") {
+                currentInput = (parseFloat(currentInput) * -1).toString();
+                display.textContent = currentInput;
+            }
+        }
+        // Thực hiện phép tính
+        function calculate() {
+            // Không có phép toán thì không làm gì
+            if (operator === null || previousInput === null) {
+                return;
+            }
+            let prev = parseFloat(previousInput);
+            let current = parseFloat(currentInput);
+            let result = 0;
+            switch (operator) {
+                case "+":
+                    result = prev + current;
+                    break;
+                case "-":
+                    result = prev - current;
+                    break;
+                case "*":
+                    result = prev * current;
+                    break;
+                case "/":
+                    if (current === 0) {
+                        alert("Không thể chia cho 0!");
+                        clearDisplay();
+                        return;
+                    }
+                    result = prev / current;
+                    break;
+                case "%":
+                    result = prev % current;
+                    break;
+            }
+            // Hiển thị toàn bộ phép tính
+            // Dấu = chỉ xuất hiện khi bấm nút =
+            expression.textContent = previousInput + " " + operator + " " + currentInput + " =";
+            // Hiển thị kết quả
+            currentInput = result.toString();
+            display.textContent = currentInput;
+            // Reset trạng thái
+            operator = null;
+            previousInput = null;
+            shouldResetDisplay = true;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form nhập liệu table HOSOSINHVIEN</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: "Times New Roman", serif;
+            background: #FFFFFF;
+            color: #404040;
+            padding: 20px;
+        }
+        .form-wrapper {
+            max-width: 550px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #D6E0DC;
+            border-radius: 5px;
+            background: #F6F8F6;
+        }
+        .form-wrapper h2 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #5B8798;
+            border-bottom: 1px solid #D6E0DC;
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 12px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #345D6B;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 7px;
+            border: 1px solid #D6E0DC;
+            border-radius: 4px;
+            font-family: "Times New Roman", serif;
+            font-size: 14px;
+            background: #FFFFFF;
+            color: #404040;
+        }
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #5B8798;
+            box-shadow: 0 0 4px rgba(91, 135, 152, 0.25);
+        }
+        .form-group input::placeholder {
+            color: #6F7775;
+        }
+        .input-error {
+            border: 1px solid #D9534F !important;
+            background-color: #FDECEC !important;
+        }
+        .input-error:focus {
+            border-color: #D9534F !important;
+            box-shadow: 0 0 4px rgba(217, 83, 79, 0.3) !important;
+        }
+        .score-group {
+            display: flex;
+            gap: 10px;
+        }
+        .score-group .form-group {
+            flex: 1;
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 10px;
+            background-color: #5B8798;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: "Times New Roman", serif;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: 0.2s;
+        }
+        .btn-submit:hover {
+            background-color: #345D6B;
+        }
+        #error-msg {
+            color: #345D6B;
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 14px;
+            display: none;
+            background-color: #EEF3F1;
+            border: 1px solid #5B8798;
+            border-radius: 4px;
+        }
+        #result-msg {
+            color: #345D6B;
+            margin-top: 15px;
+            padding: 12px;
+            font-size: 15px;
+            font-weight: bold;
+            display: none;
+            background-color: #EEF3F1;
+            border: 1px solid #5B8798;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .result-table {
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+            background: #FFFFFF;
+            font-weight: normal;
+            text-align: left;
+        }
+        .result-table td {
+            padding: 7px;
+            border: 1px solid #D6E0DC;
+        }
+        .result-table td:first-child {
+            font-weight: bold;
+            color: #345D6B;
+            width: 40%;
+        }
+        .total-score {
+            font-weight: bold;
+            color: #345D6B;
+        }
+        @media (max-width: 600px) {
+            .score-group {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-wrapper">
+        <h2>NHẬP DỮ LIỆU BẢNG HỒ SƠ</h2>
+        <div id="error-msg"></div>
+        <form onsubmit="return validateAndCalculateHoSo()">
+            <div class="form-group">
+                <label for="mahs">Mã hồ sơ:</label>
+                <input type="text" id="mahs" placeholder="Ví dụ: HS0001">
+            </div>
+            <div class="form-group">
+                <label for="hoten">Họ và tên:</label>
+                <input type="text" id="hoten" placeholder="Ví dụ: Nguyễn Văn A">
+            </div>
+            <div class="form-group">
+                <label for="ngaysinh">Ngày sinh:</label>
+                <input type="date" id="ngaysinh">
+            </div>
+            <div class="form-group">
+                <label for="diachi">Địa chỉ:</label>
+                <input type="text" id="diachi" placeholder="Ví dụ: Hà Nội">
+            </div>
+            <div class="form-group">
+                <label for="lop">Lớp:</label>
+                <input type="text" id="lop" placeholder="Ví dụ: AT18G">
+            </div>
+            <div class="score-group">
+                <div class="form-group">
+                    <label for="diemtoan">Điểm Toán:</label>
+                    <input type="text" id="diemtoan" placeholder="0 - 10">
+                </div>
+                <div class="form-group">
+                    <label for="diemly">Điểm Lý:</label>
+                    <input type="text" id="diemly" placeholder="0 - 10">
+                </div>
+                <div class="form-group">
+                    <label for="diemhoa">Điểm Hóa:</label>
+                    <input type="text" id="diemhoa" placeholder="0 - 10">
+                </div>
+            </div>
+            <button type="submit" class="btn-submit">TÍNH TỔNG ĐIỂM & LƯU</button>
+        </form>
+        <div id="result-msg"></div>
+    </div>
+    <script>
+        function validateAndCalculateHoSo() {
+            var maHS = document.getElementById("mahs");
+            var hoTen = document.getElementById("hoten");
+            var ngaySinh = document.getElementById("ngaysinh");
+            var diaChi = document.getElementById("diachi");
+            var lop = document.getElementById("lop");
+            var diemToan = document.getElementById("diemtoan");
+            var diemLy = document.getElementById("diemly");
+            var diemHoa = document.getElementById("diemhoa");
+            var errorDiv = document.getElementById("error-msg");
+            var resultDiv = document.getElementById("result-msg");
+            clearErrors(); // Xóa trạng thái lỗi cũ
+            errorDiv.style.display = "none";
+            resultDiv.style.display = "none";
+            var maHSValue = maHS.value.trim();
+            var hoTenValue = hoTen.value.trim();
+            var ngaySinhValue = ngaySinh.value;
+            var diaChiValue = diaChi.value.trim();
+            var lopValue = lop.value.trim();
+            var strToan = diemToan.value.trim();
+            var strLy = diemLy.value.trim();
+            var strHoa = diemHoa.value.trim();
+            var errorMessage = "";
+            var firstError = null;
+            /* Kiểm tra mã hồ sơ */
+            if (maHSValue === "") {
+                errorMessage = "Mã hồ sơ không được để trống.";
+                showError(maHS);
+                firstError = maHS;
+            } else if (maHSValue.length > 8) {
+                errorMessage = "Mã hồ sơ không được quá 8 ký tự.";
+                showError(maHS);
+                firstError = maHS;
+            }
+            /* Kiểm tra họ tên */
+            else if (hoTenValue === "") {
+                errorMessage = "Họ tên không được để trống.";
+                showError(hoTen);
+                firstError = hoTen;
+            } else if (hoTenValue.length > 50) {
+                errorMessage = "Họ tên không được quá 50 ký tự.";
+                showError(hoTen);
+                firstError = hoTen;
+            }
+            /* Kiểm tra ngày sinh */
+            else if (ngaySinhValue === "") {
+                errorMessage = "Vui lòng chọn ngày sinh.";
+                showError(ngaySinh);
+                firstError = ngaySinh;
+            }
+            /* Kiểm tra địa chỉ */
+            else if (diaChiValue === "") {
+                errorMessage = "Địa chỉ không được để trống.";
+                showError(diaChi);
+                firstError = diaChi;
+            } else if (diaChiValue.length > 150) {
+                errorMessage = "Địa chỉ không được quá 150 ký tự.";
+                showError(diaChi);
+                firstError = diaChi;
+            }
+            /* Kiểm tra lớp */
+            else if (lopValue === "") {
+                errorMessage = "Lớp không được để trống.";
+                showError(lop);
+                firstError = lop;
+            } else if (lopValue.length > 6) {
+                errorMessage = "Mã lớp không được quá 6 ký tự.";
+                showError(lop);
+                firstError = lop;
+            }
+            /* Kiểm tra điểm Toán */
+            else if (strToan === "" || isNaN(strToan)) {
+                errorMessage = "Điểm Toán phải là một số thực hợp lệ (0-10).";
+                showError(diemToan);
+                firstError = diemToan;
+            } else if (parseFloat(strToan) < 0 || parseFloat(strToan) > 10) {
+                errorMessage = "Điểm Toán phải nằm trong khoảng từ 0 đến 10.";
+                showError(diemToan);
+                firstError = diemToan;
+            }
+            /* Kiểm tra điểm Lý */
+            else if (strLy === "" || isNaN(strLy)) {
+                errorMessage = "Điểm Lý phải là một số thực hợp lệ (0-10).";
+                showError(diemLy);
+                firstError = diemLy;
+            } else if (parseFloat(strLy) < 0 || parseFloat(strLy) > 10) {
+                errorMessage = "Điểm Lý phải nằm trong khoảng từ 0 đến 10.";
+                showError(diemLy);
+                firstError = diemLy;
+            }
+            /* Kiểm tra điểm Hóa */
+            else if (strHoa === "" || isNaN(strHoa)) {
+                errorMessage = "Điểm Hóa phải là một số thực hợp lệ (0-10).";
+                showError(diemHoa);
+                firstError = diemHoa;
+            } else if (parseFloat(strHoa) < 0 || parseFloat(strHoa) > 10) {
+                errorMessage = "Điểm Hóa phải nằm trong khoảng từ 0 đến 10.";
+                showError(diemHoa);
+                firstError = diemHoa;
+            }
+            /* Nếu có lỗi */
+            if (errorMessage !== "") {
+                errorDiv.style.display = "block";
+                errorDiv.innerHTML = "⚠ " + errorMessage;
+                /* Đưa con trỏ vào ô sai đầu tiên */
+                if (firstError !== null) {
+                    firstError.focus();
+                }
+                return false;
+            }
+            /* Tính tổng điểm */
+            var toan = parseFloat(strToan);
+            var ly = parseFloat(strLy);
+            var hoa = parseFloat(strHoa);
+            var tongDiem = toan + ly + hoa;
+            /* Hiển thị kết quả */
+            resultDiv.style.display = "block";
+            resultDiv.innerHTML =
+                "Hồ sơ của thí sinh đã hợp lệ!" +
+                "<h3>THÔNG TIN HỒ SƠ ĐÃ NHẬP</h3>" +
+                "<table class='result-table'>" +
+                "<tr>" + "<td>Mã hồ sơ:</td>" + "<td>" + maHSValue + "</td>" + "</tr>" +
+                "<tr>" + "<td>Họ và tên:</td>" + "<td><strong>" + hoTenValue + "</strong></td>" + "</tr>" +
+                "<tr>" + "<td>Ngày sinh:</td>" + "<td>" + ngaySinhValue + "</td>" + "</tr>" +
+                "<tr>" + "<td>Địa chỉ:</td>" + "<td>" + diaChiValue + "</td>" + "</tr>" +
+                "<tr>" + "<td>Lớp:</td>" + "<td>" + lopValue + "</td>" + "</tr>" +
+                "<tr>" + "<td>Điểm Toán:</td>" + "<td>" + toan.toFixed(2) + "</td>" + "</tr>" +
+                "<tr>" + "<td>Điểm Lý:</td>" + "<td>" + ly.toFixed(2) + "</td>" + "</tr>" +
+                "<tr>" + "<td>Điểm Hóa:</td>" + "<td>" + hoa.toFixed(2) + "</td>" + "</tr>" +
+                "<tr>" + "<td>Tổng điểm:</td>" + "<td class='total-score'>" + tongDiem.toFixed(2) + " điểm" + "</td>" + "</tr>" +
+                "</table>";
+            return false;
+        }
+        /* Hiện ô nhập sai màu đỏ */
+        function showError(input) {
+            input.classList.add("input-error");
+        }
+        /* Xóa toàn bộ trạng thái lỗi */
+        function clearErrors() {
+            var inputs = document.querySelectorAll(
+                ".form-group input"
+            );
+            inputs.forEach(function(input) {
+                input.classList.remove("input-error");
+            });
+        }
+        /* Khi người dùng sửa ô sai thì bỏ màu đỏ */
+        var inputs = document.querySelectorAll(
+            ".form-group input"
+        );
+        inputs.forEach(function(input) {
+            input.addEventListener("input", function() {
+                input.classList.remove("input-error");
+            });
+            input.addEventListener("change", function() {
+                input.classList.remove("input-error");
+            });
+        });
+    </script>
+</body>
+</html>
