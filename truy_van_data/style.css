@@ -1,0 +1,325 @@
+html,
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Times New Roman", serif;
+    background-color: #FFFFFF;
+    color: #404040;
+}
+
+/* =========================
+   MENU
+   ========================= */
+
+.menu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    padding: 16px 25px;
+
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #D6E0DC;
+
+    gap: 22px;
+}
+
+.menu a {
+    display: inline-block;
+
+    padding: 7px 2px;
+
+    color: #404040;
+    text-decoration: none;
+
+    font-family: "Times New Roman", serif;
+    font-size: 14px;
+    font-weight: bold;
+
+    border-bottom: 2px solid transparent;
+
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    color: #5B8798;
+    border-bottom-color: #5B8798;
+}
+
+.menu a.active {
+    color: #5B8798;
+    border-bottom-color: #5B8798;
+}
+
+/* =========================
+   NỘI DUNG CHUNG
+   ========================= */
+
+.content {
+    width: 100%;
+    min-height: 300px;
+
+    padding: 30px 35px;
+
+    background-color: #FFFFFF;
+}
+
+.content h3 {
+    width: 100%;
+
+    margin: 0 0 25px;
+    padding-bottom: 8px;
+
+    color: #5B8798;
+
+    font-size: 21px;
+    font-weight: bold;
+    text-align: left;
+
+    border-bottom: 1px solid #D6E0DC;
+}
+
+/* =========================
+   BỐ CỤC 2 CỘT
+   ========================= */
+
+.layout-container {
+    display: flex;
+    align-items: flex-start;
+
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    gap: 30px;
+}
+
+/* =========================
+   CỘT DANH SÁCH LỚP
+   ========================= */
+
+.sidebar {
+    width: 250px;
+    flex-shrink: 0;
+
+    padding-right: 25px;
+
+    border-right: 1px solid #D6E0DC;
+
+    line-height: 1.7;
+}
+
+.sidebar b {
+    color: #345D6B;
+}
+
+.sidebar a {
+    color: #5B8798;
+
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #345D6B;
+
+    text-decoration: underline;
+}
+
+/* =========================
+   CỘT NỘI DUNG
+   ========================= */
+
+.content-area {
+    flex: 1;
+    min-width: 0;
+}
+
+.content-area h3 {
+    margin-top: 0;
+}
+
+.content-area p {
+    line-height: 1.7;
+}
+
+/* =========================
+   BẢNG SINH VIÊN
+   ========================= */
+
+.student-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background-color: #FFFFFF;
+
+    font-size: 14px;
+}
+
+.student-table th,
+.student-table td {
+    padding: 9px 10px;
+
+    border: 1px solid #D6E0DC;
+
+    text-align: left;
+    vertical-align: middle;
+}
+
+.student-table th {
+    color: #345D6B;
+
+    background-color: #F6F8F6;
+
+    font-weight: bold;
+}
+
+.student-table tr:nth-child(even) {
+    background-color: #FAFCFB;
+}
+
+.student-table tr:hover {
+    background-color: #F6F8F6;
+}
+
+/* =========================
+   LINK CHI TIẾT
+   ========================= */
+
+.detail-link {
+    color: #5B8798;
+
+    text-decoration: none;
+
+    font-weight: normal;
+
+    transition: 0.3s;
+}
+
+.detail-link:hover {
+    color: #345D6B;
+
+    text-decoration: underline;
+}
+
+/* =========================
+   CHI TIẾT HỌC SINH
+   ========================= */
+
+.detail-card {
+    width: 100%;
+    max-width: 600px;
+
+    padding: 20px;
+
+    background-color: #F6F8F6;
+
+    border: 1px solid #D6E0DC;
+    border-radius: 7px;
+}
+
+.detail-card p {
+    margin: 0;
+
+    padding: 10px 0;
+
+    border-bottom: 1px solid #EAF1EF;
+}
+
+.detail-card p:last-of-type {
+    margin-bottom: 18px;
+}
+
+.detail-card b {
+    color: #345D6B;
+}
+
+.back-link {
+    display: inline-block;
+
+    margin-top: 5px;
+
+    color: #5B8798;
+
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.back-link:hover {
+    color: #345D6B;
+
+    text-decoration: underline;
+}
+
+/* =========================
+   THÔNG BÁO
+   ========================= */
+
+.notice {
+    color: #6F7775;
+
+    line-height: 1.7;
+}
+
+.no-data {
+    padding: 20px !important;
+
+    color: #6F7775;
+
+    text-align: center !important;
+
+    background-color: #FFFFFF !important;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 750px) {
+
+    .menu {
+        justify-content: center;
+    }
+
+    .content {
+        padding: 25px 15px;
+    }
+
+    .layout-container {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .sidebar {
+        width: 100%;
+
+        padding-right: 0;
+        padding-bottom: 20px;
+
+        border-right: none;
+        border-bottom: 1px solid #D6E0DC;
+    }
+
+    .content-area {
+        width: 100%;
+    }
+
+    .student-table {
+        display: block;
+
+        overflow-x: auto;
+    }
+
+}

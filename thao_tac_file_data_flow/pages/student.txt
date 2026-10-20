@@ -1,0 +1,20 @@
+Thu Trang
+2005-07-23
+Hà Nội
+ttrang.png
+class1
+Nguyệt Khuê
+2005-03-19
+Thái Nguyên
+nkhue.png
+class2
+Tâm Quyên
+2005-03-28
+Hong Kong
+tquyen.png
+class3
+Bảo Ngọc
+2005-07-26
+Pháp
+bngoc.PNG
+class4
