@@ -1,0 +1,1 @@
+<h4>Mọi trang được chạy trên nền tảng index.php</h4>

@@ -1,0 +1,497 @@
+html,
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Times New Roman", serif;
+    background-color: #FFFFFF;
+    color: #404040;
+}
+
+/* =========================
+   MENU
+   ========================= */
+
+.menu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 22px;
+
+    padding: 16px 25px;
+
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #D6E0DC;
+}
+
+.menu a {
+    display: inline-block;
+
+    padding: 7px 2px;
+
+    color: #404040;
+    text-decoration: none;
+
+    font-family: "Times New Roman", serif;
+    font-size: 14px;
+    font-weight: bold;
+
+    border-bottom: 2px solid transparent;
+
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    color: #5B8798;
+    border-bottom-color: #5B8798;
+}
+
+.menu a.active {
+    color: #5B8798;
+    border-bottom-color: #5B8798;
+}
+
+/* =========================
+   NỘI DUNG CHUNG
+   ========================= */
+
+.content {
+    width: 100%;
+    min-height: 300px;
+
+    padding: 30px 35px;
+
+    background-color: #FFFFFF;
+}
+
+.content h3 {
+    width: 100%;
+
+    margin: 0 0 25px;
+    padding-bottom: 8px;
+
+    color: #5B8798;
+
+    font-size: 21px;
+    font-weight: bold;
+    text-align: left;
+
+    border-bottom: 1px solid #D6E0DC;
+}
+
+/* =========================
+   TRANG HOME
+   ========================= */
+
+.page-content {
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    color: #404040;
+
+    line-height: 1.7;
+}
+
+.page-content p {
+    margin: 0 0 12px;
+}
+
+.page-content ul {
+    margin-top: 10px;
+    padding-left: 25px;
+}
+
+.page-content li {
+    margin-bottom: 8px;
+}
+
+.page-content b {
+    color: #345D6B;
+}
+
+/* =========================
+   LINK THÊM DỮ LIỆU
+   ========================= */
+
+.page-actions {
+    max-width: 1000px;
+
+    margin: 0 auto 15px;
+
+    text-align: left;
+}
+
+.add-link {
+    color: #5B8798;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.add-link:hover {
+    color: #345D6B;
+    text-decoration: underline;
+}
+
+/* =========================
+   BẢNG DỮ LIỆU
+   ========================= */
+
+.db-table {
+    width: 100%;
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    border-collapse: collapse;
+
+    background-color: #FFFFFF;
+
+    font-size: 14px;
+}
+
+.db-table th,
+.db-table td {
+    padding: 9px 10px;
+
+    border: 1px solid #D6E0DC;
+
+    text-align: left;
+    vertical-align: middle;
+}
+
+.db-table th {
+    color: #345D6B;
+
+    background-color: #F6F8F6;
+
+    font-weight: bold;
+}
+
+.db-table tr:nth-child(even) {
+    background-color: #FAFCFB;
+}
+
+.db-table tr:hover {
+    background-color: #F6F8F6;
+}
+
+/* Điểm số */
+
+.score-cell {
+    text-align: center !important;
+    white-space: nowrap;
+}
+
+.score-cell b {
+    color: #345D6B;
+}
+
+/* =========================
+   LINK THAO TÁC
+   ========================= */
+
+.action-links {
+    white-space: nowrap;
+}
+
+.action-btn {
+    color: #5B8798;
+
+    text-decoration: none;
+
+    margin: 0 4px;
+
+    transition: 0.3s;
+}
+
+.action-btn:hover {
+    color: #345D6B;
+    text-decoration: underline;
+}
+
+.action-btn.delete {
+    color: #A05A5A;
+}
+
+.action-btn.delete:hover {
+    color: #803F3F;
+}
+
+/* =========================
+   FORM
+   ========================= */
+
+.db-form-table {
+    width: 100%;
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    border-collapse: collapse;
+}
+
+.db-form-table td {
+    padding: 10px 8px;
+
+    border-bottom: 1px solid #EEF3EF;
+
+    vertical-align: middle;
+}
+
+.db-form-table td:first-child {
+    width: 140px;
+
+    color: #345D6B;
+
+    font-weight: bold;
+
+    vertical-align: top;
+
+    padding-top: 14px;
+}
+
+/* INPUT */
+
+.db-form-table input[type="text"],
+.db-form-table input[type="number"],
+.db-form-table input[type="date"],
+.db-form-table select {
+    width: 100%;
+
+    padding: 9px 10px;
+
+    font-family: "Times New Roman", serif;
+    font-size: 14px;
+
+    color: #404040;
+
+    background-color: #FFFFFF;
+
+    border: 1px solid #D6E0DC;
+    border-radius: 5px;
+
+    outline: none;
+
+    transition: 0.3s;
+}
+
+.db-form-table input[type="text"]:focus,
+.db-form-table input[type="number"]:focus,
+.db-form-table input[type="date"]:focus,
+.db-form-table select:focus {
+    border-color: #5B8798;
+
+    box-shadow: 0 0 0 2px rgba(91, 135, 152, 0.12);
+}
+
+/* INPUT READONLY */
+
+.db-form-table input[readonly] {
+    background-color: #F6F8F6;
+    color: #6F7775;
+}
+
+/* =========================
+   NÚT FORM
+   ========================= */
+
+.db-form-table .form-buttons {
+    padding-top: 15px;
+
+    border-bottom: none;
+
+    white-space: nowrap;
+}
+
+.db-form-table input[type="submit"],
+.db-form-table input[type="button"] {
+    padding: 9px 20px;
+
+    margin-right: 7px;
+
+    font-family: "Times New Roman", serif;
+    font-size: 14px;
+    font-weight: bold;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.db-form-table input[type="submit"] {
+    color: #FFFFFF;
+
+    background-color: #5B8798;
+
+    border: 1px solid #5B8798;
+}
+
+.db-form-table input[type="submit"]:hover {
+    background-color: #345D6B;
+    border-color: #345D6B;
+}
+
+.db-form-table input[type="button"] {
+    color: #404040;
+
+    background-color: #F6F8F6;
+
+    border: 1px solid #D6E0DC;
+}
+
+.db-form-table input[type="button"]:hover {
+    color: #345D6B;
+
+    background-color: #EAF1EF;
+
+    border-color: #5B8798;
+}
+
+/* =========================
+   PHÂN TRANG
+   ========================= */
+
+.pagination {
+    max-width: 1000px;
+
+    margin: 20px auto 0;
+
+    text-align: center;
+
+    color: #404040;
+
+    font-size: 14px;
+}
+
+.pagination span {
+    margin-right: 6px;
+}
+
+.pagination a {
+    display: inline-block;
+
+    min-width: 30px;
+
+    padding: 6px 8px;
+
+    margin: 0 2px;
+
+    color: #5B8798;
+
+    background-color: #FFFFFF;
+
+    border: 1px solid #D6E0DC;
+    border-radius: 4px;
+
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.pagination a:hover {
+    color: #345D6B;
+
+    background-color: #EAF1EF;
+
+    border-color: #5B8798;
+}
+
+.pagination a.active {
+    color: #FFFFFF;
+
+    background-color: #5B8798;
+
+    border-color: #5B8798;
+
+    font-weight: bold;
+}
+
+/* =========================
+   KHÔNG CÓ DỮ LIỆU
+   ========================= */
+
+.no-data {
+    padding: 20px !important;
+
+    color: #6F7775;
+
+    text-align: center !important;
+
+    background-color: #FFFFFF !important;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 800px) {
+
+    .menu {
+        justify-content: center;
+
+        gap: 15px;
+
+        padding: 12px 15px;
+    }
+
+    .content {
+        padding: 25px 15px;
+    }
+
+    .db-table {
+        display: block;
+
+        overflow-x: auto;
+
+        white-space: nowrap;
+    }
+
+    .db-form-table td:first-child {
+        width: 120px;
+    }
+}
+
+@media (max-width: 560px) {
+
+    .menu {
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 8px;
+    }
+
+    .db-form-table,
+    .db-form-table tbody,
+    .db-form-table tr,
+    .db-form-table td {
+        display: block;
+
+        width: 100%;
+    }
+
+    .db-form-table td:first-child {
+        padding-bottom: 5px;
+        padding-top: 12px;
+    }
+
+    .db-form-table .form-buttons {
+        padding-top: 15px;
+    }
+}
